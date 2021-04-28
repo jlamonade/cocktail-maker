@@ -4,8 +4,8 @@ var ingredientInput = document.querySelector("#icon_prefix2");
 var addIngredientsButton = document.querySelector("#add-button");
 
 // STARTING DATA
-var temporaryIngredientsArray = localStorage.getItem("ingredients")
-  ? localStorage.getItem("ingredients")
+var temporaryIngredientsArray = localStorage.getItem("ingredients-list")
+  ? JSON.parse(localStorage.getItem("ingredients-list"))
   : [];
 var apiKey = "9973533";
 var baseUrl = "";
@@ -30,17 +30,19 @@ function validateIngredientInput() {
       if (data.ingredients !== null) {
         // console.log(data)
         temporaryIngredientsArray.push(data.ingredients[0].strIngredient);
-        populateIngredientToIngredientsDiv(data.ingredients[0].strIngredient);
+        populateIngredientToIngredientsDiv(temporaryIngredientsArray);
         updateIngredientsListInLocalStorage();
       }
     });
 }
 
-function populateIngredientToIngredientsDiv(ingredient) {
-  var indgredientItem = document.createElement("li");
-  indgredientItem.textContent = ingredient;
-  indgredientItem.setAttribute("class", "collection-item");
-  ingredientsDiv.appendChild(indgredientItem);
+function populateIngredientToIngredientsDiv() {
+  temporaryIngredientsArray.forEach((ingredient) => {
+    var indgredientItem = document.createElement("li");
+    indgredientItem.textContent = ingredient;
+    indgredientItem.setAttribute("class", "collection-item");
+    ingredientsDiv.appendChild(indgredientItem);
+  });
 }
 
 function updateIngredientsListInLocalStorage() {
@@ -67,3 +69,4 @@ getData();
 addIngredientsButton.addEventListener("click", validateIngredientInput);
 // validateIngredientInput("gin");
 // validateIngredientInput("vodka");
+populateIngredientToIngredientsDiv(temporaryIngredientsArray);
