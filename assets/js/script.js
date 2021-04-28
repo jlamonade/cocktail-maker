@@ -1,10 +1,11 @@
 // DEPENDENCIES
-var ingredientsDiv = document.querySelector("#list");
+var ingredientsDiv = document.querySelector("")
 var ingredientInput = document.querySelector("#input");
 
 // STARTING DATA
 var temporaryIngredientsArray = [];
-var API_key = "1";
+var apiKey = "9973533";
+var baseUrl = "";
 var listdrinks = [];
 var firstLetter = "M";
 
@@ -16,7 +17,7 @@ function validateIngredientInput(ingredient) {
     if non-null return then ingredients are added to temporary
     ingredients array
   */
-  var requestUrl = "https://www.thecocktaildb.com/api/json/v1/1/search.php?i=";
+  var requestUrl = `https://www.thecocktaildb.com/api/json/v2/${apiKey}/search.php?i=`;
   var ingredients = ingredient;
   fetch(requestUrl + ingredients)
     .then(function (response) {
@@ -49,11 +50,11 @@ function removeIngredientFromList(ingredient) {
 }
 
 var getData = async() => {
-    var response = await fetch(`https://thecocktaildb.com/api/json/v1/1/search.php?f=${firstLetter}`)
+    var response = await fetch(`https://thecocktaildb.com/api/json/v2/${apiKey}/search.php?f=${firstLetter}`)
     var data = await response.json()
     console.log(data)
 }
-getData();
 
+getData();
 validateIngredientInput("gin");
 validateIngredientInput("vodka");
