@@ -26,6 +26,7 @@ function validateIngredientInput() {
     .then(function (data) {
       console.log(data)
       if (data.ingredients !== null) {
+        console.log(data)
         temporaryIngredientsArray.push(data.ingredients[0].strIngredient);
         populateIngredientToIngredientsDiv(data.ingredients[0].strIngredient);
         updateIngredientsListInLocalStorage();
