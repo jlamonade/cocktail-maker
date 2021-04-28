@@ -1,14 +1,15 @@
-// DEPENDENCIES
 var ingredientsDiv = document.querySelector(".collection");
 var ingredientInput = document.querySelector("#icon_prefix2");
 var addIngredientsButton = document.querySelector("#add-button");
 
+
 // STARTING DATA
-var temporaryIngredientsArray = [];
+var temporaryIngredientsArray = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j" ,"k"];
 var apiKey = "9973533";
 var baseUrl = "";
 var listdrinks = [];
 var firstLetter = "M";
+var colArr= [];
 
 // FUNCTIONS
 function validateIngredientInput() {
@@ -61,6 +62,17 @@ var getData = async () => {
   console.log(data);
 };
 
+function randomRec() {
+    while (colArr.length < 5 ){
+        var rand = temporaryIngredientsArray[Math.floor(Math.random() * temporaryIngredientsArray.length)];
+        if (!colArr.includes(rand)){
+            colArr.push(rand);
+        }
+    }
+    console.log(colArr);
+    return "#" + colArr.join("")
+}
+randomRec();
 getData();
 addIngredientsButton.addEventListener("click", validateIngredientInput);
 // validateIngredientInput("gin");
