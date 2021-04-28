@@ -1,3 +1,7 @@
+
+
+
+=======
 var API_key = "1";
 var listdrinks = [];
 var firstLetter = "M";
@@ -8,3 +12,4 @@ var getData = async() => {
     console.log(data)
 }
 getData();
+
