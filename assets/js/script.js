@@ -4,7 +4,9 @@ var ingredientInput = document.querySelector("#icon_prefix2");
 var addIngredientsButton = document.querySelector("#add-button");
 
 // STARTING DATA
-var temporaryIngredientsArray = [];
+var temporaryIngredientsArray = localStorage.getItem("ingredients")
+  ? localStorage.getItem("ingredients")
+  : [];
 var apiKey = "9973533";
 var baseUrl = "";
 var listdrinks = [];
@@ -17,14 +19,13 @@ function validateIngredientInput() {
     if non-null return then ingredients are added to temporary
     ingredients array
   */
-  var ingredients = ingredientInput.value
+  var ingredients = ingredientInput.value;
   var requestUrl = `https://www.thecocktaildb.com/api/json/v2/${apiKey}/search.php?i=${ingredients}`;
   fetch(requestUrl)
     .then(function (response) {
       return response.json();
     })
     .then(function (data) {
-
       // console.log(data)
       if (data.ingredients !== null) {
         // console.log(data)
