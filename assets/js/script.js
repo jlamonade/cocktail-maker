@@ -4,7 +4,12 @@ var ingredientInput = document.querySelector("#input");
 
 // STARTING DATA
 var temporaryIngredientsArray = [];
+var API_key = "1";
+var listdrinks = [];
+var firstLetter = "M";
 
+
+// FUNCTIONS 
 function validateIngredientInput(ingredient) {
   /* 
     validates by checking for a non-null return
@@ -43,6 +48,12 @@ function removeIngredientFromList(ingredient) {
     }
 }
 
+var getData = async() => {
+    var response = await fetch(`https://thecocktaildb.com/api/json/v1/1/search.php?f=${firstLetter}`)
+    var data = await response.json()
+    console.log(data)
+}
+getData();
+
 validateIngredientInput("gin");
 validateIngredientInput("vodka");
-

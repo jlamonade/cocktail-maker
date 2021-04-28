@@ -5,36 +5,62 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./assets/css/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+   
+
     <title>Document</title>
 </head>
 <body>
     <header>
-        
-            <div class="nav-wrapper">
-              <div class="col s12">
-                <a href="#!" class="breadcrumb">Enter Your Ingredients</a>
-                <a href="#!" class="breadcrumb">Choose Your Recipe</a>
-                <a href="#!" class="breadcrumb">Find More Ingredients</a>
-              </div>
+        <nav>
+            <div class="nav-wrapper teal lighten-2">
+              <a href="#" class="brand-logo center">Lazy Mixology</a>
             </div>
-          
-
+          </nav>
     </header>
     <main>
-        <p class="instructions">
-            Instructions here
-
-        </p>
-        <section class="ingredients">
-            <div id=input>
-                
-
+       <section id= "instructions">
+        <div class="row">
+            <div class="col s4 offset-s4 valign">
+              <div class="card teal lighten-3">
+                <div class="card-content white-text">
+                  <span class="card-title">Instructions</span>
+                  <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ratione aut voluptatum atque alias suscipit quasi quis minus fugiat nostrum velit esse illo rem, itaque laudantium qui consequuntur provident deleniti dolores?</p>
+                </div>
+              </div>
             </div>
-            <div id=list>
+          </div>
+        </section>             
 
-            </div>
+        <section id= "ingredients">
+            <a class="btn-floating btn-large waves-effect waves-indigo" id="add-button"><i class="material-icons">+</i></a>
+            <div class="row">
+                <form class="col s12">
+                  <div class="row">
+                    <div class="input-field col s4 offset-s4 valign">
+                      <textarea id="icon_prefix2" class="materialize-textarea"></textarea>
+                      <label for="icon_prefix2">Enter Ingredients</label>
+                    </div>
+                  </div>
+                </form>
+              </div>
         </section>
+
+        <section id="ingredient-list">
+            <div class="row">
+                <div class="col s4 offset-s4 valign">
+                  <div class="card teal lighten-3">
+                    <div class="card-content white-text">
+                      <p id="ingredient"></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </section>
+    
+
     </main>
     <script src="./assets/js/script.js"></script>
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </html>
