@@ -37,10 +37,12 @@ function validateIngredientInput() {
 }
 
 function populateIngredientToIngredientsDiv() {
+  ingredientsDiv.innerHTML = "";
   temporaryIngredientsArray.forEach((ingredient) => {
     var indgredientItem = document.createElement("li");
     indgredientItem.textContent = ingredient;
     indgredientItem.setAttribute("class", "collection-item");
+    indgredientItem.addEventListener("click", removeIngredientFromList)
     ingredientsDiv.appendChild(indgredientItem);
   });
 }
@@ -52,8 +54,13 @@ function updateIngredientsListInLocalStorage() {
   );
 }
 
-function removeIngredientFromList(ingredient) {
-  if (ingredient in temporaryIngredientsArray) {
+function removeIngredientFromList(event) {
+  console.log(event.target.textContent)
+  var removeIndex = temporaryIngredientsArray.indexOf(event.target.textContent);
+  if (removeIndex > -1) {
+    temporaryIngredientsArray.splice(removeIndex, 1);
+    updateIngredientsListInLocalStorage();
+    populateIngredientToIngredientsDiv(temporaryIngredientsArray);
   }
 }
 
