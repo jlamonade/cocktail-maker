@@ -10,6 +10,8 @@ var firstLetter = "M";
 
 
 // FUNCTIONS 
+
+
 function validateIngredientInput(ingredient) {
   /* 
     validates by checking for a non-null return
@@ -57,3 +59,9 @@ getData();
 
 validateIngredientInput("gin");
 validateIngredientInput("vodka");
+
+// inititalization
+document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.collapsible');
+    var instances = M.Collapsible.init(elems, options);
+  });
