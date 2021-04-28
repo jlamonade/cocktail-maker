@@ -1,6 +1,6 @@
 // DEPENDENCIES
-var ingredientsDiv = document.querySelector(".ingredients-div");
-var ingredientInput = document.querySelector(".ingredient-input");
+var ingredientsDiv = document.querySelector("#list");
+var ingredientInput = document.querySelector("#input");
 
 // STARTING DATA
 var temporaryIngredientsArray = [];
@@ -14,11 +14,20 @@ function validateIngredientInput(ingredient) {
     })
     .then(function (data) {
       if (data.ingredients !== null) {
-        temporaryIngredientsArray.push(ingredient);
+        temporaryIngredientsArray.push(data.ingredients[0].strIngredient);
+        populateIngredientToIngredientsDiv(data.ingredients[0].strIngredient);
       }
     });
 }
 
+function populateIngredientToIngredientsDiv(ingredient) {
+  var indgredientItem = document.createElement("div");
+  indgredientItem.textContent = ingredient;
+  indgredientItem.setAttribute("class", "ingredient-item");
+  ingredientsDiv.appendChild(indgredientItem)
+}
 
 validateIngredientInput("gin");
+validateIngredientInput("vodka");
 console.log(temporaryIngredientsArray);
+
