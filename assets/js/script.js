@@ -37,6 +37,12 @@ function updateIngredientsListInLocalStorage() {
     localStorage.setItem("ingredients-list", JSON.stringify(temporaryIngredientsArray))
 }
 
+function removeIngredientFromList(ingredient) {
+    if (ingredient in temporaryIngredientsArray) {
+        return
+    }
+}
+
 validateIngredientInput("gin");
 validateIngredientInput("vodka");
 
