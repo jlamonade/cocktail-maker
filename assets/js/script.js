@@ -1,13 +1,14 @@
 // DEPENDENCIES
-var ingredientsDiv = document.querySelector("")
+var ingredientsDiv = document.querySelector(".collection")
 var ingredientInput = document.querySelector("#input");
 
 // STARTING DATA
-var temporaryIngredientsArray = [];
+var temporaryIngredientsArray = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j" ,"k"];
 var apiKey = "9973533";
 var baseUrl = "";
 var listdrinks = [];
 var firstLetter = "M";
+var colArr= [];
 
 
 // FUNCTIONS 
@@ -33,9 +34,9 @@ function validateIngredientInput(ingredient) {
 }
 
 function populateIngredientToIngredientsDiv(ingredient) {
-  var indgredientItem = document.createElement("div");
+  var indgredientItem = document.createElement("li");
   indgredientItem.textContent = ingredient;
-  indgredientItem.setAttribute("class", "ingredient-item");
+  indgredientItem.setAttribute("class", "collection-item");
   ingredientsDiv.appendChild(indgredientItem);
 }
 
@@ -55,6 +56,17 @@ var getData = async() => {
     console.log(data)
 }
 
+function randomRec() {
+    while (colArr.length < 5 ){
+        var rand = temporaryIngredientsArray[Math.floor(Math.random() * temporaryIngredientsArray.length)];
+        if (!colArr.includes(rand)){
+            colArr.push(rand);
+        }
+    }
+    console.log(colArr);
+    return "#" + colArr.join("")
+}
+randomRec();
 getData();
 validateIngredientInput("gin");
 validateIngredientInput("vodka");
