@@ -1,6 +1,6 @@
 // DEPENDENCIES
-var ingredientsDiv = document.querySelector("")
-var ingredientInput = document.querySelector("#input");
+var ingredientsDiv = document.querySelector(".collection")
+var ingredientInput = document.querySelector("#icon_prefix2");
 
 // STARTING DATA
 var temporaryIngredientsArray = [];
@@ -33,9 +33,9 @@ function validateIngredientInput(ingredient) {
 }
 
 function populateIngredientToIngredientsDiv(ingredient) {
-  var indgredientItem = document.createElement("div");
+  var indgredientItem = document.createElement("li");
   indgredientItem.textContent = ingredient;
-  indgredientItem.setAttribute("class", "ingredient-item");
+  indgredientItem.setAttribute("class", "collection-item");
   ingredientsDiv.appendChild(indgredientItem);
 }
 
