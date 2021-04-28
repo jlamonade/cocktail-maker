@@ -18,16 +18,17 @@ function validateIngredientInput() {
     if non-null return then ingredients are added to temporary
     ingredients array
   */
-  var requestUrl = `https://www.thecocktaildb.com/api/json/v2/${apiKey}/search.php?i=`;
-  var ingredients = ingredientInput.textContent;
-  fetch(requestUrl + ingredients)
+  var ingredients = ingredientInput.value
+  var requestUrl = `https://www.thecocktaildb.com/api/json/v2/${apiKey}/search.php?i=${ingredients}`;
+  fetch(requestUrl)
     .then(function (response) {
       return response.json();
     })
     .then(function (data) {
-      console.log(data)
+
+      // console.log(data)
       if (data.ingredients !== null) {
-        console.log(data)
+        // console.log(data)
         temporaryIngredientsArray.push(data.ingredients[0].strIngredient);
         populateIngredientToIngredientsDiv(data.ingredients[0].strIngredient);
         updateIngredientsListInLocalStorage();
