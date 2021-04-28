@@ -5,5 +5,5 @@ var ingredientsDiv = document.querySelector(".ingredients-div")
 var temporaryIngredientsArray = []
 
 function validateIngredientInput() {
- return
+    return
 }
