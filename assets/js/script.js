@@ -9,9 +9,9 @@ var temporaryIngredientsArray = localStorage.getItem("ingredients-list")
   : [];
 var apiKey = "9973533";
 var baseUrl = "";
-var listdrinks = [];
 var firstLetter = "M";
 var colArr= [];
+var cocktailIds = [];
 
 
 
@@ -69,36 +69,51 @@ function removeIngredientFromList(event) {
     populateIngredientToIngredientsDiv(temporaryIngredientsArray);
   }
 }
+var getData = async() => {
+  var listofIng = temporaryIngredientsArray.join(",");
+  fetch(`https://www.thecocktaildb.com/api/json/v2/${apiKey}/filter.php?i=${listofIng}`)
+  .then(response => response.json())
+  .then(data => {
+      randomRec(data.drinks)
+      console.log("cocktail ids:",cocktailIds);
+  })
 
-var getData = async () => {
-  var response = await fetch(
-    `https://thecocktaildb.com/api/json/v2/${apiKey}/search.php?f=${firstLetter}`
-  );
-  var data = await response.json();
-  console.log(data);
-};
+  for (var i = 0; i < cocktailIds.length; i++){
+    fetch(`https://www.thecocktaildb.com/api/json/v2/${apiKey}/lookup.php?i=${cocktailIds[i]}`)
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+  
+    })}
+  }
+  
 
-function randomRec() {
-    while (colArr.length < 5 ){
-        var rand = temporaryIngredientsArray[Math.floor(Math.random() * temporaryIngredientsArray.length)];
-        if (!colArr.includes(rand)){
-            colArr.push(rand);
+ function randomRec(data) {
+   
+    // go through the data array until we have at least five items 
+    while (cocktailIds.length < 5 ){
+        // generate random index
+        var rand = data[Math.floor(Math.random() * data.length)];
+        // is the item at that index already in the cocktails id
+        console.log("random rec:", rand)
+        if (!cocktailIds.includes(rand)){
+          // if not, put it in ther
+            cocktailIds.push(rand);
         }
     }
-    console.log(colArr);
-    return "#" + colArr.join("")
+    console.log(cocktailIds);
+    return "#" + cocktailIds.join("")
 }
 
-// inititalization
+// inititalization 
 $(document).ready(function(){
     $('.collapsible').collapsible();
   });
 
-randomRec();
+
 getData();
 addIngredientsButton.addEventListener("click", validateIngredientInput);
 // validateIngredientInput("gin");
 // validateIngredientInput("vodka");
 
 populateIngredientToIngredientsDiv(temporaryIngredientsArray);
-
