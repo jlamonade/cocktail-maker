@@ -10,6 +10,9 @@ var temporaryIngredientsArray = localStorage.getItem("ingredients-list")
 var apiKey = "9973533";
 var baseUrl = "";
 var firstLetter = "M";
+var cocktailIds = [];
+
+
 
 var colArr = [];
 var cocktailIds = [];
@@ -88,29 +91,32 @@ var getData = async () => {
 };
 
 function getDrinkRecipes() {
+  recipeCollapsible.innerHTML = "";
   for (var i = 0; i < cocktailIds.length; i++) {
     fetch(
       `https://www.thecocktaildb.com/api/json/v2/${apiKey}/lookup.php?i=${cocktailIds[i]}`
     )
       .then((response) => response.json())
       .then((data) => {
-        drinks.push(data);
-        console.log(data.drinks[0]);
+        drinks.push(data.drinks[0]);
         populateCollapsibleWithRecipes(data.drinks[0]);
       });
   }
 }
 
-function populateCollapsibleWithRecipes(data) {
-  var drinkName = data.strDrink;
-  var ingredients = {};
-  var instructions = data.strInstructions
+function populateCollapsibleWithRecipes(drink) {
+  console.log(drink);
+  var drinkName = drink.strDrink;
+  var ingredients = [];
+  var instructions = drink.strInstructions;
   console.log(instructions);
+
   for (var i = 1; i < 16; i++) {
-    var ingredientString = data[`strIngredient${i}`];
+    // for each ingredient/measure
+    var ingredientString = drink[`strIngredient${i}`];
     if (ingredientString) {
       // validates ingredient string is not null or empty string
-      ingredients[data[`strIngredient${i}`]] = data[`strMeasure${i}`];
+      ingredients.push([drink[`strIngredient${i}`], drink[`strMeasure${i}`]]);
     }
   }
 
@@ -122,17 +128,14 @@ function populateCollapsibleWithRecipes(data) {
 
   var recipeBodyDiv = document.createElement("div");
   recipeBodyDiv.setAttribute("class", "collapsible-body teal lighten-3");
-  
+
   var recipeIngredientsDiv = document.createElement("ul");
-  for (ingredient of ingredients) {
-    return // WORKING 
-  }
 
   var recipeInstructionsDiv = document.createElement("div");
   recipeInstructionsDiv.innerHTML = `${instructions}`;
 
-  recipeBodyDiv.appendChild(recipeIngredientsDiv)
-  recipeBodyDiv.appendChild(recipeInstructionsDiv)
+  recipeBodyDiv.appendChild(recipeIngredientsDiv);
+  recipeBodyDiv.appendChild(recipeInstructionsDiv);
 
   recipeLi.appendChild(recipeNameDiv);
   recipeLi.appendChild(recipeBodyDiv);
