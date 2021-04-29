@@ -9,9 +9,11 @@ var temporaryIngredientsArray = localStorage.getItem("ingredients-list")
 var apiKey = "9973533";
 var baseUrl = "";
 var firstLetter = "M";
+
 var colArr = [];
 var cocktailIds = [];
 var drinks = [];
+
 
 // FUNCTIONS
 
