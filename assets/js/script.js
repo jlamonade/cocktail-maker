@@ -29,11 +29,12 @@ function validateIngredientInput() {
     .then(function (data) {
       // console.log(data)
       if (data.ingredients !== null) {
-        console.log(data)
         var ingredientString = data.ingredients[0].strIngredient.split(" ").join('_')
-        temporaryIngredientsArray.push(ingredientString);
-        populateIngredientToIngredientsDiv(temporaryIngredientsArray);
-        updateIngredientsListInLocalStorage();
+        if (!temporaryIngredientsArray.includes(ingredientString)) {
+          temporaryIngredientsArray.push(ingredientString);
+          populateIngredientToIngredientsDiv(temporaryIngredientsArray);
+          updateIngredientsListInLocalStorage();
+        }
       }
     });
 }
@@ -58,10 +59,9 @@ function updateIngredientsListInLocalStorage() {
 }
 
 function removeIngredientFromList(event) {
-  console.log(event.target.textContent);
   var ingredientString = event.target.textContent.split(" ").join("_")
   var removeIndex = temporaryIngredientsArray.indexOf(ingredientString);
-  if (removeIndex > -1) {
+  if (removeIndex > -1) { // if item exists it will return a number larger than -1
     temporaryIngredientsArray.splice(removeIndex, 1);
     updateIngredientsListInLocalStorage();
     populateIngredientToIngredientsDiv(temporaryIngredientsArray);
