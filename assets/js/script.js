@@ -11,7 +11,7 @@ var apiKey = "9973533";
 var baseUrl = "";
 var listdrinks = [];
 var firstLetter = "M";
-var colArr= [1,2,3,4,5];
+var cocktailIds = [];
 
 
 
@@ -87,8 +87,8 @@ function randomRec(data) {
   // go through the data array until we have at least five items
   while (cocktailIds.length < 5) {
     // generate random index
-    var rand = data[Math.floor(Math.random() * data.length)];
-    // is the item at that index already in the cocktails id
+    var rand = data[Math.floor(Math.random() * cocktailIds.length)];
+    // if the item at that index already in the cocktails id
     // console.log("random rec:", rand);
     if (!cocktailIds.includes(rand)) {
       // if not, put it in ther
