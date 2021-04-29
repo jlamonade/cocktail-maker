@@ -4,7 +4,9 @@ var addIngredientsButton = document.querySelector("#add-button");
 
 
 // STARTING DATA
-var temporaryIngredientsArray = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j" ,"k"];
+var temporaryIngredientsArray = localStorage.getItem("ingredients-list")
+  ? JSON.parse(localStorage.getItem("ingredients-list"))
+  : [];
 var apiKey = "9973533";
 var baseUrl = "";
 var listdrinks = [];
@@ -18,29 +20,32 @@ function validateIngredientInput() {
     if non-null return then ingredients are added to temporary
     ingredients array
   */
-  var ingredients = ingredientInput.value
+  var ingredients = ingredientInput.value;
   var requestUrl = `https://www.thecocktaildb.com/api/json/v2/${apiKey}/search.php?i=${ingredients}`;
   fetch(requestUrl)
     .then(function (response) {
       return response.json();
     })
     .then(function (data) {
-
       // console.log(data)
       if (data.ingredients !== null) {
         // console.log(data)
         temporaryIngredientsArray.push(data.ingredients[0].strIngredient);
-        populateIngredientToIngredientsDiv(data.ingredients[0].strIngredient);
+        populateIngredientToIngredientsDiv(temporaryIngredientsArray);
         updateIngredientsListInLocalStorage();
       }
     });
 }
 
-function populateIngredientToIngredientsDiv(ingredient) {
-  var indgredientItem = document.createElement("li");
-  indgredientItem.textContent = ingredient;
-  indgredientItem.setAttribute("class", "collection-item");
-  ingredientsDiv.appendChild(indgredientItem);
+function populateIngredientToIngredientsDiv() {
+  ingredientsDiv.innerHTML = "";
+  temporaryIngredientsArray.forEach((ingredient) => {
+    var indgredientItem = document.createElement("li");
+    indgredientItem.textContent = ingredient;
+    indgredientItem.setAttribute("class", "collection-item");
+    indgredientItem.addEventListener("click", removeIngredientFromList)
+    ingredientsDiv.appendChild(indgredientItem);
+  });
 }
 
 function updateIngredientsListInLocalStorage() {
@@ -50,8 +55,13 @@ function updateIngredientsListInLocalStorage() {
   );
 }
 
-function removeIngredientFromList(ingredient) {
-  if (ingredient in temporaryIngredientsArray) {
+function removeIngredientFromList(event) {
+  console.log(event.target.textContent)
+  var removeIndex = temporaryIngredientsArray.indexOf(event.target.textContent);
+  if (removeIndex > -1) {
+    temporaryIngredientsArray.splice(removeIndex, 1);
+    updateIngredientsListInLocalStorage();
+    populateIngredientToIngredientsDiv(temporaryIngredientsArray);
   }
 }
 
@@ -78,3 +88,4 @@ getData();
 addIngredientsButton.addEventListener("click", validateIngredientInput);
 // validateIngredientInput("gin");
 // validateIngredientInput("vodka");
+populateIngredientToIngredientsDiv(temporaryIngredientsArray);
