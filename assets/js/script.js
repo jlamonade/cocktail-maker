@@ -2,7 +2,6 @@ var ingredientsDiv = document.querySelector(".collection");
 var ingredientInput = document.querySelector("#icon_prefix2");
 var addIngredientsButton = document.querySelector("#add-button");
 
-
 // STARTING DATA
 var temporaryIngredientsArray = localStorage.getItem("ingredients-list")
   ? JSON.parse(localStorage.getItem("ingredients-list"))
@@ -11,15 +10,11 @@ var apiKey = "9973533";
 var baseUrl = "";
 var listdrinks = [];
 var firstLetter = "M";
-var colArr= [];
+var colArr = [1, 2, 3, 4, 5, 6, 7];
 
+// FUNCTIONS
 
-
-// FUNCTIONS 
-
-
-function validateIngredientInput(ingredient) {
-
+function validateIngredientInput() {
   /* 
     validates by checking for a non-null return
     if non-null return then ingredients are added to temporary
@@ -34,8 +29,9 @@ function validateIngredientInput(ingredient) {
     .then(function (data) {
       // console.log(data)
       if (data.ingredients !== null) {
-        // console.log(data)
-        temporaryIngredientsArray.push(data.ingredients[0].strIngredient);
+        console.log(data)
+        var ingredientString = data.ingredients[0].strIngredient.split(" ").join('_')
+        temporaryIngredientsArray.push(ingredientString);
         populateIngredientToIngredientsDiv(temporaryIngredientsArray);
         updateIngredientsListInLocalStorage();
       }
@@ -45,10 +41,11 @@ function validateIngredientInput(ingredient) {
 function populateIngredientToIngredientsDiv() {
   ingredientsDiv.innerHTML = "";
   temporaryIngredientsArray.forEach((ingredient) => {
+    var ingredientString = ingredient.split("_").join(" ")
     var indgredientItem = document.createElement("li");
-    indgredientItem.textContent = ingredient;
+    indgredientItem.textContent = ingredientString;
     indgredientItem.setAttribute("class", "collection-item");
-    indgredientItem.addEventListener("click", removeIngredientFromList)
+    indgredientItem.addEventListener("click", removeIngredientFromList);
     ingredientsDiv.appendChild(indgredientItem);
   });
 }
@@ -61,8 +58,9 @@ function updateIngredientsListInLocalStorage() {
 }
 
 function removeIngredientFromList(event) {
-  console.log(event.target.textContent)
-  var removeIndex = temporaryIngredientsArray.indexOf(event.target.textContent);
+  console.log(event.target.textContent);
+  var ingredientString = event.target.textContent.split(" ").join("_")
+  var removeIndex = temporaryIngredientsArray.indexOf(ingredientString);
   if (removeIndex > -1) {
     temporaryIngredientsArray.splice(removeIndex, 1);
     updateIngredientsListInLocalStorage();
@@ -79,26 +77,29 @@ var getData = async () => {
 };
 
 function randomRec() {
-    while (colArr.length < 5 ){
-        var rand = temporaryIngredientsArray[Math.floor(Math.random() * temporaryIngredientsArray.length)];
-        if (!colArr.includes(rand)){
-            colArr.push(rand);
-        }
+  while (colArr.length < 5) {
+    var rand =
+      temporaryIngredientsArray[
+        Math.floor(Math.random() * temporaryIngredientsArray.length)
+      ];
+    if (!colArr.includes(rand)) {
+      colArr.push(rand);
     }
-    console.log(colArr);
-    return "#" + colArr.join("")
+  }
+  console.log(colArr);
+  return "#" + colArr.join("");
 }
 
 // inititalization
-$(document).ready(function(){
-    $('.collapsible').collapsible();
-  });
+$(document).ready(function () {
+  $(".collapsible").collapsible();
+});
 
-randomRec();
 getData();
+// randomRec();
+
 addIngredientsButton.addEventListener("click", validateIngredientInput);
 // validateIngredientInput("gin");
 // validateIngredientInput("vodka");
 
 populateIngredientToIngredientsDiv(temporaryIngredientsArray);
-
