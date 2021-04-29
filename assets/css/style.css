@@ -8,7 +8,7 @@
 }
 
 body {
-    background-color: honeydew;
+    background-color: black;
 }
 
 img {
@@ -18,6 +18,10 @@ img {
     margin-top: 4px;
     fill: honeydew;
 
+}
+
+.collection {
+    background-color: black;
 }
 
 
