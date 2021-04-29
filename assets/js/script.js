@@ -1,7 +1,7 @@
 var ingredientsDiv = document.querySelector(".collection");
 var ingredientInput = document.querySelector("#icon_prefix2");
 var addIngredientsButton = document.querySelector("#add-button");
-var recipeCollapsible = document.querySelector(".collapsible");
+
 
 // STARTING DATA
 var temporaryIngredientsArray = localStorage.getItem("ingredients-list")
@@ -9,15 +9,17 @@ var temporaryIngredientsArray = localStorage.getItem("ingredients-list")
   : [];
 var apiKey = "9973533";
 var baseUrl = "";
+var listdrinks = [];
 var firstLetter = "M";
+var colArr= [1,2,3,4,5];
 
-var colArr = [];
-var cocktailIds = [];
-var drinks = [];
 
-// FUNCTIONS
 
-function validateIngredientInput() {
+// FUNCTIONS 
+
+
+function validateIngredientInput(ingredient) {
+
   /* 
     validates by checking for a non-null return
     if non-null return then ingredients are added to temporary
@@ -48,11 +50,10 @@ function validateIngredientInput() {
 function populateIngredientToIngredientsDiv() {
   ingredientsDiv.innerHTML = "";
   temporaryIngredientsArray.forEach((ingredient) => {
-    var ingredientString = ingredient.split("_").join(" ");
     var indgredientItem = document.createElement("li");
-    indgredientItem.textContent = ingredientString;
+    indgredientItem.textContent = ingredient;
     indgredientItem.setAttribute("class", "collection-item");
-    indgredientItem.addEventListener("click", removeIngredientFromList);
+    indgredientItem.addEventListener("click", removeIngredientFromList)
     ingredientsDiv.appendChild(indgredientItem);
   });
 }
@@ -65,10 +66,9 @@ function updateIngredientsListInLocalStorage() {
 }
 
 function removeIngredientFromList(event) {
-  var ingredientString = event.target.textContent.split(" ").join("_");
-  var removeIndex = temporaryIngredientsArray.indexOf(ingredientString);
+  console.log(event.target.textContent)
+  var removeIndex = temporaryIngredientsArray.indexOf(event.target.textContent);
   if (removeIndex > -1) {
-    // if item exists it will return a number larger than -1
     temporaryIngredientsArray.splice(removeIndex, 1);
     updateIngredientsListInLocalStorage();
     populateIngredientToIngredientsDiv(temporaryIngredientsArray);
@@ -76,15 +76,11 @@ function removeIngredientFromList(event) {
 }
 
 var getData = async () => {
-  var listofIng = temporaryIngredientsArray.join(",");
-  fetch(
-    `https://www.thecocktaildb.com/api/json/v2/${apiKey}/filter.php?i=${listofIng}`
-  )
-    .then((response) => response.json())
-    .then((data) => {
-      randomRec(data.drinks);
-      getDrinkRecipes();
-    });
+  var response = await fetch(
+    `https://thecocktaildb.com/api/json/v2/${apiKey}/search.php?f=${firstLetter}`
+  );
+  var data = await response.json();
+  console.log(data);
 };
 
 function randomRec(data) {
@@ -155,15 +151,15 @@ function populateCollapsibleWithRecipes(drink) {
 }
 
 // inititalization
-$(document).ready(function () {
-  $(".collapsible").collapsible();
-});
+$(document).ready(function(){
+    $('.collapsible').collapsible();
+  });
 
+randomRec();
 getData();
-// randomRec();
-
 addIngredientsButton.addEventListener("click", validateIngredientInput);
 // validateIngredientInput("gin");
 // validateIngredientInput("vodka");
 
 populateIngredientToIngredientsDiv(temporaryIngredientsArray);
+
