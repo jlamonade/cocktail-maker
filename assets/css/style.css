@@ -4,11 +4,12 @@
     text-align: center;
     font-family: 'Poiret One', cursive;
     color: #f0fff0;
+    font-weight:bold;
     
 }
 
 body {
-    background-color: honeydew;
+    background-color: black;
 }
 
 img {
@@ -18,6 +19,16 @@ img {
     margin-top: 4px;
     fill: honeydew;
 
+}
+
+#input-field{
+    font-family: 'Poiret One', cursive;
+
+}
+
+
+.collection {
+    background-color: black;
 }
 
 
