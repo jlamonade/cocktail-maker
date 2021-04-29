@@ -8,9 +8,10 @@ var temporaryIngredientsArray = localStorage.getItem("ingredients-list")
   : [];
 var apiKey = "9973533";
 var baseUrl = "";
-var listdrinks = [];
 var firstLetter = "M";
-var colArr = [1, 2, 3, 4, 5, 6, 7];
+var colArr = [];
+var cocktailIds = [];
+var drinks = [];
 
 // FUNCTIONS
 
@@ -29,7 +30,9 @@ function validateIngredientInput() {
     .then(function (data) {
       // console.log(data)
       if (data.ingredients !== null) {
-        var ingredientString = data.ingredients[0].strIngredient.split(" ").join('_')
+        var ingredientString = data.ingredients[0].strIngredient
+          .split(" ")
+          .join("_");
         if (!temporaryIngredientsArray.includes(ingredientString)) {
           temporaryIngredientsArray.push(ingredientString);
           populateIngredientToIngredientsDiv(temporaryIngredientsArray);
@@ -42,7 +45,7 @@ function validateIngredientInput() {
 function populateIngredientToIngredientsDiv() {
   ingredientsDiv.innerHTML = "";
   temporaryIngredientsArray.forEach((ingredient) => {
-    var ingredientString = ingredient.split("_").join(" ")
+    var ingredientString = ingredient.split("_").join(" ");
     var indgredientItem = document.createElement("li");
     indgredientItem.textContent = ingredientString;
     indgredientItem.setAttribute("class", "collection-item");
@@ -59,9 +62,10 @@ function updateIngredientsListInLocalStorage() {
 }
 
 function removeIngredientFromList(event) {
-  var ingredientString = event.target.textContent.split(" ").join("_")
+  var ingredientString = event.target.textContent.split(" ").join("_");
   var removeIndex = temporaryIngredientsArray.indexOf(ingredientString);
-  if (removeIndex > -1) { // if item exists it will return a number larger than -1
+  if (removeIndex > -1) {
+    // if item exists it will return a number larger than -1
     temporaryIngredientsArray.splice(removeIndex, 1);
     updateIngredientsListInLocalStorage();
     populateIngredientToIngredientsDiv(temporaryIngredientsArray);
@@ -69,25 +73,42 @@ function removeIngredientFromList(event) {
 }
 
 var getData = async () => {
-  var response = await fetch(
-    `https://thecocktaildb.com/api/json/v2/${apiKey}/search.php?f=${firstLetter}`
-  );
-  var data = await response.json();
-  console.log(data);
+  var listofIng = temporaryIngredientsArray.join(",");
+  fetch(
+    `https://www.thecocktaildb.com/api/json/v2/${apiKey}/filter.php?i=${listofIng}`
+  )
+    .then((response) => response.json())
+    .then((data) => {
+      randomRec(data.drinks);
+      getDrinkRecipes();
+    });
 };
 
-function randomRec() {
-  while (colArr.length < 5) {
-    var rand =
-      temporaryIngredientsArray[
-        Math.floor(Math.random() * temporaryIngredientsArray.length)
-      ];
-    if (!colArr.includes(rand)) {
-      colArr.push(rand);
+function getDrinkRecipes() {
+  for (var i = 0; i < cocktailIds.length; i++) {
+    fetch(
+      `https://www.thecocktaildb.com/api/json/v2/${apiKey}/lookup.php?i=${cocktailIds[i]}`
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        drinks.push(data);
+      });
+  }
+}
+
+function randomRec(data) {
+  // go through the data array until we have at least five items
+  while (cocktailIds.length < 5) {
+    // generate random index
+    var rand = data[Math.floor(Math.random() * data.length)];
+    // is the item at that index already in the cocktails id
+    // console.log("random rec:", rand);
+    if (!cocktailIds.includes(rand)) {
+      // if not, put it in ther
+      cocktailIds.push(rand.idDrink);
+      // console.log("drinkID: ", rand.idDrink)
     }
   }
-  console.log(colArr);
-  return "#" + colArr.join("");
 }
 
 // inititalization
