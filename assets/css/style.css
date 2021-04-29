@@ -1,10 +1,17 @@
 * {
     margin-top:0px ;
     margin-bottom: 0px;
+    text-align: center;
+    font-family: 'Poiret One', cursive;
+    color: honeydew;
+    
 }
 
-.collapsible {
-    border-right: 150px;
-    border-left: 150px;
-
+body {
+    background-color: honeydew;
 }
+
+#recipe {
+    color: #4db6ac 
+}
+

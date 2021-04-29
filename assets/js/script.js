@@ -11,7 +11,7 @@ var apiKey = "9973533";
 var baseUrl = "";
 var listdrinks = [];
 var firstLetter = "M";
-var colArr= [];
+var colArr= [1,2,3,4,5];
 
 
 
