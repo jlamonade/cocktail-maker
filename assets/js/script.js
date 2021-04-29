@@ -117,14 +117,16 @@ function populateCollapsibleWithRecipes(data) {
   var recipeLi = document.createElement("li");
 
   var recipeNameDiv = document.createElement("div");
-  recipeNameDiv.setAttribute("class", "collapsible-header");
+  recipeNameDiv.setAttribute("class", "collapsible-header teal lighten-2");
   recipeNameDiv.textContent = drinkName;
 
   var recipeBodyDiv = document.createElement("div");
-  recipeBodyDiv.setAttribute("class", "collapsible-body");
+  recipeBodyDiv.setAttribute("class", "collapsible-body teal lighten-3");
   
-  var recipeIngredientsDiv = document.createElement("div");
-  recipeIngredientsDiv.innerHTML = `placeholder ingredient`;
+  var recipeIngredientsDiv = document.createElement("ul");
+  for (ingredient of ingredients) {
+    return // WORKING 
+  }
 
   var recipeInstructionsDiv = document.createElement("div");
   recipeInstructionsDiv.innerHTML = `${instructions}`;
