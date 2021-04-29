@@ -1,14 +1,17 @@
-// DEPENDENCIES
 var ingredientsDiv = document.querySelector(".collection");
 var ingredientInput = document.querySelector("#icon_prefix2");
 var addIngredientsButton = document.querySelector("#add-button");
 
+
 // STARTING DATA
-var temporaryIngredientsArray = [];
+var temporaryIngredientsArray = localStorage.getItem("ingredients-list")
+  ? JSON.parse(localStorage.getItem("ingredients-list"))
+  : [];
 var apiKey = "9973533";
 var baseUrl = "";
 var listdrinks = [];
 var firstLetter = "M";
+var colArr= [];
 
 
 
@@ -22,28 +25,32 @@ function validateIngredientInput(ingredient) {
     if non-null return then ingredients are added to temporary
     ingredients array
   */
-  var requestUrl = `https://www.thecocktaildb.com/api/json/v2/${apiKey}/search.php?i=`;
-  var ingredients = ingredientInput.textContent;
-  fetch(requestUrl + ingredients)
+  var ingredients = ingredientInput.value;
+  var requestUrl = `https://www.thecocktaildb.com/api/json/v2/${apiKey}/search.php?i=${ingredients}`;
+  fetch(requestUrl)
     .then(function (response) {
       return response.json();
     })
     .then(function (data) {
-      console.log(data)
+      // console.log(data)
       if (data.ingredients !== null) {
-        console.log(data)
+        // console.log(data)
         temporaryIngredientsArray.push(data.ingredients[0].strIngredient);
-        populateIngredientToIngredientsDiv(data.ingredients[0].strIngredient);
+        populateIngredientToIngredientsDiv(temporaryIngredientsArray);
         updateIngredientsListInLocalStorage();
       }
     });
 }
 
-function populateIngredientToIngredientsDiv(ingredient) {
-  var indgredientItem = document.createElement("li");
-  indgredientItem.textContent = ingredient;
-  indgredientItem.setAttribute("class", "collection-item");
-  ingredientsDiv.appendChild(indgredientItem);
+function populateIngredientToIngredientsDiv() {
+  ingredientsDiv.innerHTML = "";
+  temporaryIngredientsArray.forEach((ingredient) => {
+    var indgredientItem = document.createElement("li");
+    indgredientItem.textContent = ingredient;
+    indgredientItem.setAttribute("class", "collection-item");
+    indgredientItem.addEventListener("click", removeIngredientFromList)
+    ingredientsDiv.appendChild(indgredientItem);
+  });
 }
 
 function updateIngredientsListInLocalStorage() {
@@ -53,8 +60,13 @@ function updateIngredientsListInLocalStorage() {
   );
 }
 
-function removeIngredientFromList(ingredient) {
-  if (ingredient in temporaryIngredientsArray) {
+function removeIngredientFromList(event) {
+  console.log(event.target.textContent)
+  var removeIndex = temporaryIngredientsArray.indexOf(event.target.textContent);
+  if (removeIndex > -1) {
+    temporaryIngredientsArray.splice(removeIndex, 1);
+    updateIngredientsListInLocalStorage();
+    populateIngredientToIngredientsDiv(temporaryIngredientsArray);
   }
 }
 
@@ -66,18 +78,27 @@ var getData = async () => {
   console.log(data);
 };
 
-
-validateIngredientInput("gin");
-validateIngredientInput("vodka");
+function randomRec() {
+    while (colArr.length < 5 ){
+        var rand = temporaryIngredientsArray[Math.floor(Math.random() * temporaryIngredientsArray.length)];
+        if (!colArr.includes(rand)){
+            colArr.push(rand);
+        }
+    }
+    console.log(colArr);
+    return "#" + colArr.join("")
+}
 
 // inititalization
 $(document).ready(function(){
     $('.collapsible').collapsible();
   });
-        
 
+randomRec();
 getData();
 addIngredientsButton.addEventListener("click", validateIngredientInput);
 // validateIngredientInput("gin");
 // validateIngredientInput("vodka");
+
+populateIngredientToIngredientsDiv(temporaryIngredientsArray);
 
