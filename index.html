@@ -11,15 +11,18 @@
       integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
       crossorigin="anonymous"
     ></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com"> 
+<link href="https://fonts.googleapis.com/css2?family=Poiret+One&display=swap" rel="stylesheet">
    
-
-    <title>Document</title>
+    <title>Lazy Mixology</title>
+    
 </head>
 <body>
     <header>
         <nav>
             <div class="nav-wrapper teal lighten-2">
               <a href="#" class="brand-logo center">Lazy Mixology</a>
+              <img src="./assets/images/icon.svg">
             </div>
           </nav>
     </header>
@@ -38,11 +41,12 @@
         </section>             
 
         <section id= "ingredients">
-            <a class="btn-floating btn-large waves-effect waves-indigo" id="add-button"><i class="material-icons">+</i></a>
             <div class="row">
                 <form class="col s12">
                   <div class="row">
                     <div class="input-field col s4 offset-s4 valign">
+                        <p class="right-align"><a class="btn-floating btn-large waves-effect waves-indigo" id="add-button"><i class="material-icons">+</i></a>
+                        </p>
                       <textarea id="icon_prefix2" class="materialize-textarea"></textarea>
                       <label for="icon_prefix2">Enter Ingredients</label>
                     </div>
@@ -51,18 +55,36 @@
               </div>
         </section>
 
+        <div class="delete-button">
+          <a class="waves-effect waves-light btn-large teal lighten-2">Delete Items</a>
+          </div>
+
         <section id="ingredient-list">
             <ul class="collection teal lighten-3">
               </ul>
         </section>
 
-        <ul class="collapsible">
-            <li class="active">
-              <div class="collapsible-header"><i class="material-icons">Recipe</i></div>
-              <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+        
+
+        <section id="recipe">
+            <ul class="collapsible popout">
+              
+            <li>
+              <div class="collapsible-header teal lighten-2"><i class="material-icons">Recipe</i></div>
+              <div class="collapsible-body teal lighten-3"><span>Lorem ipsum dolor sit amet.</span></div>
             </li>
-          </ul>
-            
+
+            </ul>
+        </section>
+      
+        <section id="maps">
+            <ul class="collapsible popout">
+            <li>
+              <div class="collapsible-header teal lighten-2"><i class="material-icons">Need More Ingredients? Find Stores Nearby!</i></div>
+              <div class="collapsible-body teal lighten-3 "><span>Lorem ipsum dolor sit amet.</span></div>
+            </li>
+            </ul>
+        </section>    
     
 
     </main>
