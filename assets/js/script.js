@@ -15,7 +15,6 @@ var colArr = [];
 var cocktailIds = [];
 var drinks = [];
 
-
 // FUNCTIONS
 
 function validateIngredientInput() {
@@ -40,6 +39,7 @@ function validateIngredientInput() {
           temporaryIngredientsArray.push(ingredientString);
           populateIngredientToIngredientsDiv(temporaryIngredientsArray);
           updateIngredientsListInLocalStorage();
+          recipeCollapsible.innerHTML = "";
         }
       }
     });
@@ -87,59 +87,6 @@ var getData = async () => {
     });
 };
 
-function getDrinkRecipes() {
-  for (var i = 0; i < cocktailIds.length; i++) {
-    fetch(
-      `https://www.thecocktaildb.com/api/json/v2/${apiKey}/lookup.php?i=${cocktailIds[i]}`
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        drinks.push(data);
-        console.log(data.drinks[0]);
-        populateCollapsibleWithRecipes(data.drinks[0]);
-      });
-  }
-}
-
-function populateCollapsibleWithRecipes(data) {
-  var drinkName = data.strDrink;
-  var ingredients = {};
-  var instructions = data.strInstructions
-  console.log(instructions);
-  for (var i = 1; i < 16; i++) {
-    var ingredientString = data[`strIngredient${i}`];
-    if (ingredientString) {
-      // validates ingredient string is not null or empty string
-      ingredients[data[`strIngredient${i}`]] = data[`strMeasure${i}`];
-    }
-  }
-
-  var recipeLi = document.createElement("li");
-
-  var recipeNameDiv = document.createElement("div");
-  recipeNameDiv.setAttribute("class", "collapsible-header teal lighten-2");
-  recipeNameDiv.textContent = drinkName;
-
-  var recipeBodyDiv = document.createElement("div");
-  recipeBodyDiv.setAttribute("class", "collapsible-body teal lighten-3");
-  
-  var recipeIngredientsDiv = document.createElement("ul");
-  for (ingredient of ingredients) {
-    return // WORKING 
-  }
-
-  var recipeInstructionsDiv = document.createElement("div");
-  recipeInstructionsDiv.innerHTML = `${instructions}`;
-
-  recipeBodyDiv.appendChild(recipeIngredientsDiv)
-  recipeBodyDiv.appendChild(recipeInstructionsDiv)
-
-  recipeLi.appendChild(recipeNameDiv);
-  recipeLi.appendChild(recipeBodyDiv);
-
-  recipeCollapsible.appendChild(recipeLi);
-}
-
 function randomRec(data) {
   // go through the data array until we have at least five items
   while (cocktailIds.length < 5) {
@@ -152,6 +99,59 @@ function randomRec(data) {
       cocktailIds.push(rand.idDrink);
     }
   }
+}
+
+function getDrinkRecipes() {
+  recipeCollapsible.innerHTML = "";
+  for (var i = 0; i < cocktailIds.length; i++) {
+    fetch(
+      `https://www.thecocktaildb.com/api/json/v2/${apiKey}/lookup.php?i=${cocktailIds[i]}`
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        drinks.push(data.drinks[0]);
+        populateCollapsibleWithRecipes(data.drinks[0]);
+      });
+  }
+}
+
+function populateCollapsibleWithRecipes(drink) {
+  console.log(drink);
+  var drinkName = drink.strDrink;
+  var ingredients = [];
+  var instructions = drink.strInstructions;
+  console.log(instructions);
+
+  for (var i = 1; i < 16; i++) {
+    // for each ingredient/measure
+    var ingredientString = drink[`strIngredient${i}`];
+    if (ingredientString) {
+      // validates ingredient string is not null or empty string
+      ingredients.push([drink[`strIngredient${i}`], drink[`strMeasure${i}`]]);
+    }
+  }
+
+  var recipeLi = document.createElement("li");
+
+  var recipeNameDiv = document.createElement("div");
+  recipeNameDiv.setAttribute("class", "collapsible-header teal lighten-2");
+  recipeNameDiv.textContent = drinkName;
+
+  var recipeBodyDiv = document.createElement("div");
+  recipeBodyDiv.setAttribute("class", "collapsible-body teal lighten-3");
+
+  var recipeIngredientsDiv = document.createElement("ul");
+
+  var recipeInstructionsDiv = document.createElement("div");
+  recipeInstructionsDiv.innerHTML = `${instructions}`;
+
+  recipeBodyDiv.appendChild(recipeIngredientsDiv);
+  recipeBodyDiv.appendChild(recipeInstructionsDiv);
+
+  recipeLi.appendChild(recipeNameDiv);
+  recipeLi.appendChild(recipeBodyDiv);
+
+  recipeCollapsible.appendChild(recipeLi);
 }
 
 // inititalization
