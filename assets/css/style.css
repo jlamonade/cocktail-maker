@@ -4,6 +4,7 @@
     text-align: center;
     font-family: 'Poiret One', cursive;
     color: #f0fff0;
+    font-weight:bold;
     
 }
 
@@ -19,6 +20,12 @@ img {
     fill: honeydew;
 
 }
+
+#input-field{
+    font-family: 'Poiret One', cursive;
+
+}
+
 
 .collection {
     background-color: black;
