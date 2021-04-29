@@ -130,6 +130,12 @@ function populateCollapsibleWithRecipes(drink) {
   recipeBodyDiv.setAttribute("class", "collapsible-body teal lighten-3");
 
   var recipeIngredientsDiv = document.createElement("ul");
+  for (ingredient of ingredients) {
+    console.log(ingredient)
+    var ingredientLi = document.createElement("li")
+    ingredientLi.textContent = `${ingredient[1]} ${ingredient[0]}`
+    recipeIngredientsDiv.appendChild(ingredientLi)
+  }
 
   var recipeInstructionsDiv = document.createElement("div");
   recipeInstructionsDiv.innerHTML = `${instructions}`;
