@@ -13,8 +13,13 @@ var listdrinks = [];
 var firstLetter = "M";
 var colArr= [];
 
-// FUNCTIONS
-function validateIngredientInput() {
+
+
+// FUNCTIONS 
+
+
+function validateIngredientInput(ingredient) {
+
   /* 
     validates by checking for a non-null return
     if non-null return then ingredients are added to temporary
@@ -83,9 +88,17 @@ function randomRec() {
     console.log(colArr);
     return "#" + colArr.join("")
 }
+
+// inititalization
+$(document).ready(function(){
+    $('.collapsible').collapsible();
+  });
+
 randomRec();
 getData();
 addIngredientsButton.addEventListener("click", validateIngredientInput);
 // validateIngredientInput("gin");
 // validateIngredientInput("vodka");
+
 populateIngredientToIngredientsDiv(temporaryIngredientsArray);
+

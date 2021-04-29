@@ -1,4 +1,10 @@
-.row {
-    margin-left: 200px;
-    
+* {
+    margin-top:0px ;
+    margin-bottom: 0px;
+}
+
+.collapsible {
+    border-right: 150px;
+    border-left: 150px;
+
 }
