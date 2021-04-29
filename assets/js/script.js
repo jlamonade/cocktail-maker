@@ -1,6 +1,7 @@
 var ingredientsDiv = document.querySelector(".collection");
 var ingredientInput = document.querySelector("#icon_prefix2");
 var addIngredientsButton = document.querySelector("#add-button");
+var recipeCollapsible = document.querySelector(".collapsible");
 
 // STARTING DATA
 var temporaryIngredientsArray = localStorage.getItem("ingredients-list")
@@ -94,8 +95,47 @@ function getDrinkRecipes() {
       .then((response) => response.json())
       .then((data) => {
         drinks.push(data);
+        console.log(data.drinks[0]);
+        populateCollapsibleWithRecipes(data.drinks[0]);
       });
   }
+}
+
+function populateCollapsibleWithRecipes(data) {
+  var drinkName = data.strDrink;
+  var ingredients = {};
+  var instructions = data.strInstructions
+  console.log(instructions);
+  for (var i = 1; i < 16; i++) {
+    var ingredientString = data[`strIngredient${i}`];
+    if (ingredientString) {
+      // validates ingredient string is not null or empty string
+      ingredients[data[`strIngredient${i}`]] = data[`strMeasure${i}`];
+    }
+  }
+
+  var recipeLi = document.createElement("li");
+
+  var recipeNameDiv = document.createElement("div");
+  recipeNameDiv.setAttribute("class", "collapsible-header");
+  recipeNameDiv.textContent = drinkName;
+
+  var recipeBodyDiv = document.createElement("div");
+  recipeBodyDiv.setAttribute("class", "collapsible-body");
+  
+  var recipeIngredientsDiv = document.createElement("div");
+  recipeIngredientsDiv.innerHTML = `placeholder ingredient`;
+
+  var recipeInstructionsDiv = document.createElement("div");
+  recipeInstructionsDiv.innerHTML = `${instructions}`;
+
+  recipeBodyDiv.appendChild(recipeIngredientsDiv)
+  recipeBodyDiv.appendChild(recipeInstructionsDiv)
+
+  recipeLi.appendChild(recipeNameDiv);
+  recipeLi.appendChild(recipeBodyDiv);
+
+  recipeCollapsible.appendChild(recipeLi);
 }
 
 function randomRec(data) {
@@ -108,7 +148,6 @@ function randomRec(data) {
     if (!cocktailIds.includes(rand)) {
       // if not, put it in ther
       cocktailIds.push(rand.idDrink);
-      // console.log("drinkID: ", rand.idDrink)
     }
   }
 }
