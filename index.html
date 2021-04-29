@@ -20,6 +20,7 @@
 <body>
     <header>
         <nav>
+
             <div class="nav-wrapper teal lighten-2">
               <!-- <a href="#" class="brand-logo center">Lazy Mixology</a> -->
 
@@ -37,6 +38,7 @@
               </svg>
 
 
+
             </div>
           </nav>
     </header>
@@ -44,7 +46,7 @@
        <section id= "instructions">
         <div class="row">
             <div class="col s4 offset-s4 valign">
-              <div class="card teal lighten-3">
+              <div class="card teal lighten-2">
                 <div class="card-content white-text">
                   <span class="card-title">Instructions</span>
                   <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ratione aut voluptatum atque alias suscipit quasi quis minus fugiat nostrum velit esse illo rem, itaque laudantium qui consequuntur provident deleniti dolores?</p>
@@ -70,11 +72,11 @@
         </section>
 
         <div class="delete-button">
-          <a class="waves-effect waves-light btn-large teal lighten-2">Delete Items</a>
+          <a class="waves-effect waves-light btn-large teal lighten-1">Delete Items</a>
           </div>
 
         <section id="ingredient-list">
-            <ul class="collection teal lighten-3">
+            <ul class="collection">
               </ul>
         </section>
 
@@ -82,15 +84,28 @@
 
         <section id="recipe">
             <ul class="collapsible popout">
+
                 <!-- fills wit h recipe -->
+
             </ul>
         </section>
       
         <section id="maps">
             <ul class="collapsible popout">
             <li>
-              <div class="collapsible-header teal lighten-2"><i class="material-icons">Need More Ingredients? Find Stores Nearby!</i></div>
-              <div class="collapsible-body teal lighten-3 "><span>Lorem ipsum dolor sit amet.</span></div>
+              <div class="collapsible-header teal lighten-1"><i class="material-icons">Need More Ingredients? Find Stores Nearby!</i></div>
+              <div class="collapsible-body "></span>
+                <div class="row">
+                  <form class="col s4 offset-s4 valign">
+                    <div class="row">
+                      <div class="input-field col s12">
+                        <textarea id="textarea1" class="materialize-textarea"></textarea>
+                        <label for="textarea1">Enter Location</label>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
             </li>
             </ul>
         </section>    
