@@ -1,35 +1,79 @@
 * {
-    margin-top:0px ;
-    margin-bottom: 0px;
+    /* margin-top: 0px;
+    margin-bottom: 0px; */
     text-align: center;
-    font-family: 'Poiret One', cursive;
+    font-family: "Poiret One", cursive;
     color: #f0fff0;
-    font-weight:bold;
-    
-}
-
-body {
+    font-weight: 600;
+  }
+  
+  .blue-custom {
+    background-color: #085996!important;
+  }
+  
+  .red-custom {
+      background-color: #96130F!important;
+  }
+  
+  .green-custom {
+      background-color: #089637!important;
+  }
+  
+  body {
     background-color: black;
-}
-
-img {
+  }
+  
+  img {
     width: 50px;
     height: 50px;
     margin-left: 230px;
     margin-top: 4px;
     fill: honeydew;
-
-}
-
-#input-field{
-    font-family: 'Poiret One', cursive;
-
-}
-
-
-.collection {
+  }
+  
+  #ingredient-input {
+    font-family: "Poiret One", cursive;
+  }
+  
+  .collapsible {
+    text-align: center;
+    background: none;
+  }
+  
+  #ingredients,
+  #ingredient-list,
+  #recipe,
+  #maps,
+  #instructions {
+    margin: 0.75rem;
+    outline: none;
+  }
+  
+  #ingredient-list{
+    font-size: 1.5rem;
+  }
+  
+  .collapsible-header {
+    font-size: 1.5rem;
+  }
+  
+  .collection {
     background-color: black;
-}
-
-
-
+    border: 0 !important;
+    box-shadow: none !important;
+    padding: 1rem!important;
+    border-bottom: 0!important;
+  }
+  
+  .collection-item {
+    border-bottom: 1px solid white;
+  }
+  
+  .collapsible-header,
+  .collapsible-body,
+  .collapsible,
+  ul.collapsible > li {
+    border: 0!important;
+    border-bottom: 0!important;
+    box-shadow: none !important;
+  }

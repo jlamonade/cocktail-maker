@@ -1,7 +1,7 @@
-var ingredientsDiv = document.querySelector(".collection");
-var ingredientInput = document.querySelector("#icon_prefix2");
+var ingredientsDiv = document.querySelector(".ingredient-ul");
+var ingredientInput = document.querySelector("#ingredient-input");
 var addIngredientsButton = document.querySelector("#add-button");
-var recipeCollapsible = document.querySelector(".collapsible");
+var recipeCollapsible = document.querySelector(".recipe-collapsible");
 
 // STARTING DATA
 // If localStorage has stored ingredients it will be recalled
@@ -13,12 +13,13 @@ var cocktailIds = []; // Used to store IDs pulled from getData()
 
 // FUNCTIONS
 
-function validateIngredientInput() {
+function validateIngredientInput(event) {
   /* 
     validates by checking for a non-null return
     if non-null return then ingredients are added to temporary
     ingredients array
   */
+  event.preventDefault();
   var ingredients = ingredientInput.value;
   var requestUrl = `https://www.thecocktaildb.com/api/json/v2/${apiKey}/search.php?i=${ingredients}`;
   fetch(requestUrl)
@@ -26,7 +27,6 @@ function validateIngredientInput() {
       return response.json();
     })
     .then(function (data) {
-      // console.log(data)
       if (data.ingredients !== null) {
         var ingredientString = data.ingredients[0].strIngredient
           .split(" ")
@@ -47,7 +47,7 @@ function populateIngredientToIngredientsDiv() {
     var ingredientString = ingredient.split("_").join(" ");
     var indgredientItem = document.createElement("li");
     indgredientItem.textContent = ingredientString;
-    indgredientItem.setAttribute("class", "collection-item");
+    indgredientItem.setAttribute("class", "collection-item blue-custom");
     indgredientItem.addEventListener("click", removeIngredientFromList);
     ingredientsDiv.appendChild(indgredientItem);
   });
@@ -107,10 +107,10 @@ function populateCollapsibleWithRecipes(drink) {
     takes a random drink object, parses it for name, ingredients, and instructions
     and creates a new recipe collapsible element
   */
+  recipeCollapsible.innerHTML = "";
   var drinkName = drink.strDrink;
   var ingredients = [];
   var instructions = drink.strInstructions;
-  console.log(instructions);
 
   for (var i = 1; i < 16; i++) {
     // for each ingredient/measure
@@ -121,7 +121,6 @@ function populateCollapsibleWithRecipes(drink) {
       if (ingredientMeasurement) {
         ingredients.push([ingredientString, ingredientMeasurement]);
       } else {
-        console.log(drink);
         ingredients.push([ingredientString, ""]);
       }
     }
@@ -132,17 +131,16 @@ function populateCollapsibleWithRecipes(drink) {
 
   // Recipe Name
   var recipeNameDiv = document.createElement("div");
-  recipeNameDiv.setAttribute("class", "collapsible-header teal lighten-2");
+  recipeNameDiv.setAttribute("class", "collapsible-header teal red-custom");
   recipeNameDiv.textContent = drinkName;
 
   // Recipe Body
   var recipeBodyDiv = document.createElement("div");
-  recipeBodyDiv.setAttribute("class", "collapsible-body teal lighten-3");
+  recipeBodyDiv.setAttribute("class", "collapsible-body");
 
   // Recipe Ingredients
   var recipeIngredientsDiv = document.createElement("ul");
   for (ingredient of ingredients) {
-    console.log(ingredient);
     var ingredientLi = document.createElement("li");
     ingredientLi.textContent = `${ingredient[1]} ${ingredient[0]}`;
     recipeIngredientsDiv.appendChild(ingredientLi);
@@ -163,17 +161,24 @@ function populateCollapsibleWithRecipes(drink) {
 }
 
 function randomRec(data) {
+  console.log(data)
   // go through the data array until we have at least five items
-  while (cocktailIds.length < 5) {
-    // generate random index
-    var rand = data[Math.floor(Math.random() * data.length)];
-    // is the item at that index already in the cocktails id
-    // console.log("random rec:", rand);
-    if (!cocktailIds.includes(rand)) {
-      // if not, put it in there
-      cocktailIds.push(rand.idDrink);
+  if (data.length >= 5) {
+    while (cocktailIds.length < 5) {
+      // generate random index
+      var rand = data[Math.floor(Math.random() * data.length)];
+      // is the item at that index already in the cocktails id
+      if (!cocktailIds.includes(rand.idDrink)) {
+        // if not, put it in there
+        cocktailIds.push(rand.idDrink);
+      } 
+    }
+  } else {
+    for (var i = 0; i < data.length; i++) {
+      cocktailIds.push(data[i].idDrink);
     }
   }
+  console.log(cocktailIds)
 }
 
 // inititalization
