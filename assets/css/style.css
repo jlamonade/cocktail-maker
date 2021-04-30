@@ -62,13 +62,15 @@ img {
   background-color: black;
   border: 0 !important;
   box-shadow: none !important;
-  padding: 1rem !important;
+  padding: 0 !important;
   border-bottom: 0 !important;
 }
 
-.collection-item {
-  border-bottom: 1px solid white;
-  padding: 0px!important;
+.collection li {
+  padding: 0px !important;
+  margin: 15px !important;
+  border-bottom: 0 !important;
+  cursor: pointer;
 }
 
 .collapsible-header,
@@ -82,9 +84,9 @@ ul.collapsible > li {
 }
 
 ul.collapsible > li {
-    margin-bottom: 5px;
+  margin-bottom: 5px;
 }
 
 .collapsible-body {
-    font-size: 1.5rem;
+  font-size: 1.5rem;
 }

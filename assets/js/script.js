@@ -41,7 +41,7 @@ function validateIngredientInput() {
 }
 
 function populateIngredientToIngredientsDiv() {
-  ingredientsDiv.innerHTML = "";
+  ingredientsDiv.innerHTML = '<li class="collection-header">Ingredients</li>';
   temporaryIngredientsArray.forEach((ingredient) => {
     var ingredientString = ingredient.split("_").join(" ");
     var indgredientItem = document.createElement("li");
