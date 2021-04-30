@@ -99,3 +99,7 @@ ul.collapsible > li {
 .collapsible-body {
   font-size: 1.5rem;
 }
+
+iframe {
+  margin-top: 20px;
+}
