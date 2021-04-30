@@ -1,4 +1,4 @@
-var ingredientsDiv = document.querySelector(".collection");
+var ingredientsDiv = document.querySelector(".ingredient-ul");
 var ingredientInput = document.querySelector("#ingredient-input");
 var addIngredientsButton = document.querySelector("#add-button");
 var recipeCollapsible = document.querySelector(".collapsible");
@@ -12,22 +12,21 @@ var baseUrl = "";
 var firstLetter = "M";
 var cocktailIds = [];
 
-
-
 var colArr = [];
 var cocktailIds = [];
 var drinks = [];
 
-
 // FUNCTIONS
 
-function validateIngredientInput() {
+function validateIngredientInput(event) {
+  event.preventDefault();
   /* 
     validates by checking for a non-null return
     if non-null return then ingredients are added to temporary
     ingredients array
   */
   var ingredients = ingredientInput.value;
+  console.log(ingredients);
   var requestUrl = `https://www.thecocktaildb.com/api/json/v2/${apiKey}/search.php?i=${ingredients}`;
   fetch(requestUrl)
     .then(function (response) {
@@ -54,7 +53,7 @@ function populateIngredientToIngredientsDiv() {
     var ingredientString = ingredient.split("_").join(" ");
     var indgredientItem = document.createElement("li");
     indgredientItem.textContent = ingredientString;
-    indgredientItem.setAttribute("class", "collection-item teal lighten-1");
+    indgredientItem.setAttribute("class", "collection-item blue-custom");
     indgredientItem.addEventListener("click", removeIngredientFromList);
     ingredientsDiv.appendChild(indgredientItem);
   });
@@ -105,11 +104,11 @@ function getDrinkRecipes() {
 }
 
 function populateCollapsibleWithRecipes(drink) {
-  console.log(drink);
+  // console.log(drink);
   var drinkName = drink.strDrink;
   var ingredients = [];
   var instructions = drink.strInstructions;
-  console.log(instructions);
+  // console.log(instructions);
 
   for (var i = 1; i < 16; i++) {
     // for each ingredient/measure
@@ -123,11 +122,11 @@ function populateCollapsibleWithRecipes(drink) {
   var recipeLi = document.createElement("li");
 
   var recipeNameDiv = document.createElement("div");
-  recipeNameDiv.setAttribute("class", "collapsible-header teal lighten-2");
+  recipeNameDiv.setAttribute("class", "collapsible-header red-custom");
   recipeNameDiv.textContent = drinkName;
 
   var recipeBodyDiv = document.createElement("div");
-  recipeBodyDiv.setAttribute("class", "collapsible-body teal lighten-3");
+  recipeBodyDiv.setAttribute("class", "collapsible-body");
 
   var recipeIngredientsDiv = document.createElement("ul");
 
@@ -162,11 +161,11 @@ $(document).ready(function () {
   $(".collapsible").collapsible();
 });
 
-// getData();
+getData();
 // randomRec();
 
 addIngredientsButton.addEventListener("click", validateIngredientInput);
 // validateIngredientInput("gin");
 // validateIngredientInput("vodka");
 
-// populateIngredientToIngredientsDiv(temporaryIngredientsArray);
+populateIngredientToIngredientsDiv(temporaryIngredientsArray);
