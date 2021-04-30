@@ -131,12 +131,20 @@
             <div class="collapsible-body">
               <div class="row">
                 <form>
-                  <div class="input-field col s12">
+                  <div class="input-field col s12 center-align">
                     <input
                       placeholder="Enter Address or Zip Code"
                       id="location-input"
                       type="text"
                     />
+                    <button
+                      class="btn location-button waves-effect waves-light"
+                      type="submit"
+                      id="location-button"
+                    >Search</button>
+                    <div class="google-maps-div">
+                      <!-- googlemaps div will append here -->
+                    </div>
                   </div>
                 </form>
               </div>

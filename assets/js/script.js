@@ -3,6 +3,9 @@ var ingredientInput = document.querySelector("#ingredient-input");
 var addIngredientsButton = document.querySelector("#add-button");
 var recipeCollapsible = document.querySelector(".recipe-collapsible");
 var deleteButton = document.querySelector(".delete-button");
+var googleMapsDiv = document.querySelector(".google-maps-div");
+var locationInput = document.querySelector("#location-input");
+var locationButton = document.querySelector(".location-button");
 
 // STARTING DATA
 // If localStorage has stored ingredients it will be recalled
@@ -10,6 +13,7 @@ var temporaryIngredientsArray = localStorage.getItem("ingredients-list")
   ? JSON.parse(localStorage.getItem("ingredients-list"))
   : [];
 var apiKey = "9973533";
+var googleApiKey = "AIzaSyABvtPk_HXePtQluoRv6BzG5BMfzvqiCf4";
 var cocktailIds = []; // Used to store IDs pulled from getData()
 
 // FUNCTIONS
@@ -24,24 +28,24 @@ function validateIngredientInput() {
   var requestUrl = `https://www.thecocktaildb.com/api/json/v2/${apiKey}/search.php?i=${ingredients}`;
   if (ingredients) {
     fetch(requestUrl)
-    .then(function (response) {
-      return response.json();
-    })
-    .then(function (data) {
-      if (data.ingredients !== null) {
-        var ingredientString = data.ingredients[0].strIngredient
-          .split(" ")
-          .join("_");
-        if (!temporaryIngredientsArray.includes(ingredientString)) {
-          temporaryIngredientsArray.push(ingredientString);
-          populateIngredientToIngredientsDiv(temporaryIngredientsArray);
-          updateIngredientsListInLocalStorage();
-          ingredientInput.value = "";
-          getData();
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (data) {
+        if (data.ingredients !== null) {
+          var ingredientString = data.ingredients[0].strIngredient
+            .split(" ")
+            .join("_");
+          if (!temporaryIngredientsArray.includes(ingredientString)) {
+            temporaryIngredientsArray.push(ingredientString);
+            populateIngredientToIngredientsDiv(temporaryIngredientsArray);
+            updateIngredientsListInLocalStorage();
+            ingredientInput.value = "";
+            getData();
+          }
         }
-      }
-    })
-  };
+      });
+  }
 }
 
 function populateIngredientToIngredientsDiv() {
@@ -72,7 +76,7 @@ function removeIngredientFromList(event) {
     temporaryIngredientsArray.splice(removeIndex, 1);
     updateIngredientsListInLocalStorage();
     populateIngredientToIngredientsDiv(temporaryIngredientsArray);
-    console.log("handleingredientclick", cocktailIds)
+    console.log("handleingredientclick", cocktailIds);
     getData();
   }
 }
@@ -194,15 +198,38 @@ function clearAllIngredients() {
 function handleAddIngredientsClick(event) {
   event.preventDefault();
   validateIngredientInput();
-  console.log("handleingredientclick", cocktailIds)
+  console.log("handleingredientclick", cocktailIds);
+}
+
+function loadGoogleMapsWithLocation() {
+  var location = locationInput.textContent;
+  console.log(location)
+  var mapIFrame = document.createElement("iframe");
+  mapIFrame.setAttribute("width", "100%");
+  mapIFrame.setAttribute("height", "250px");
+  mapIFrame.setAttribute("frameborder", "0");
+  var mapMode = "search";
+  var parameters = `q=grocery+stores+liquor+${location}`;
+  mapIFrame.setAttribute(
+    "src",
+    `https://www.google.com/maps/embed/v1/${mapMode}?key=${googleApiKey}&${parameters}`
+  );
+  googleMapsDiv.appendChild(mapIFrame);
+}
+
+function handleLocationButtonClick(event) {
+  event.preventDefault()
+  googleMapsDiv.innerHTML = "";
+  loadGoogleMapsWithLocation();
 }
 
 // inititalization
+loadGoogleMapsWithLocation();
 $(document).ready(function () {
   $(".collapsible").collapsible();
 });
 
-if (temporaryIngredientsArray.length > 0) { 
+if (temporaryIngredientsArray.length > 0) {
   // if there are ingredients stored in localStorage then fetch recipes
   getData();
 }
@@ -211,6 +238,7 @@ if (temporaryIngredientsArray.length > 0) {
 // This way the recipe list updates when each new ingredient is added
 addIngredientsButton.addEventListener("click", handleAddIngredientsClick);
 deleteButton.addEventListener("click", clearAllIngredients);
+locationButton.addEventListener("click", handleLocationButtonClick);
 
 // populate ingredients list with ingredients saved to localStorage
 populateIngredientToIngredientsDiv(temporaryIngredientsArray);
