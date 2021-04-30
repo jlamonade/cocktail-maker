@@ -34,11 +34,16 @@ img {
 
 #ingredient-input {
   font-family: "Poiret One", cursive;
+  text-align: center;
 }
 
 .collapsible {
   background: none;
   padding: 0 !important;
+}
+
+button {
+  font-family: "Poiret One", cursive !important; 
 }
 
 #ingredients,

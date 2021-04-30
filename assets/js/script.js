@@ -2,6 +2,7 @@ var ingredientsDiv = document.querySelector(".ingredient-ul");
 var ingredientInput = document.querySelector("#ingredient-input");
 var addIngredientsButton = document.querySelector("#add-button");
 var recipeCollapsible = document.querySelector(".recipe-collapsible");
+var deleteButton = document.querySelector(".delete-button");
 
 // STARTING DATA
 // If localStorage has stored ingredients it will be recalled
@@ -21,7 +22,8 @@ function validateIngredientInput() {
   */
   var ingredients = ingredientInput.value;
   var requestUrl = `https://www.thecocktaildb.com/api/json/v2/${apiKey}/search.php?i=${ingredients}`;
-  fetch(requestUrl)
+  if (ingredients) {
+    fetch(requestUrl)
     .then(function (response) {
       return response.json();
     })
@@ -37,7 +39,8 @@ function validateIngredientInput() {
           getData();
         }
       }
-    });
+    })
+  };
 }
 
 function populateIngredientToIngredientsDiv() {
@@ -127,7 +130,7 @@ function populateCollapsibleWithRecipes(drink) {
 
   // CREATE AND BUILD
   var recipeLi = document.createElement("li");
-  recipeLi.setAttribute("class", "center-align")
+  recipeLi.setAttribute("class", "center-align");
 
   // Recipe Name
   var recipeNameDiv = document.createElement("div");
@@ -179,6 +182,13 @@ function randomRec(data) {
   }
 }
 
+function clearAllIngredients() {
+  temporaryIngredientsArray = [];
+  updateIngredientsListInLocalStorage();
+  ingredientsDiv.innerHTML = '<li class="collection-header">Ingredients</li>';
+  recipeCollapsible.innerHTML = "";
+}
+
 function handleAddIngredientsClick(event) {
   event.preventDefault();
   validateIngredientInput();
@@ -189,13 +199,15 @@ $(document).ready(function () {
   $(".collapsible").collapsible();
 });
 
-if (temporaryIngredientsArray) {
+if (temporaryIngredientsArray.length > 0) { 
+  // if there are ingredients stored in localStorage then fetch recipes
   getData();
 }
 
 // Each time item add is clicked it will fetch recipes from the API
 // This way the recipe list updates when each new ingredient is added
 addIngredientsButton.addEventListener("click", handleAddIngredientsClick);
+deleteButton.addEventListener("click", clearAllIngredients);
 
 // populate ingredients list with ingredients saved to localStorage
 populateIngredientToIngredientsDiv(temporaryIngredientsArray);
