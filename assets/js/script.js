@@ -2,6 +2,7 @@ var ingredientsDiv = document.querySelector(".ingredient-ul");
 var ingredientInput = document.querySelector("#ingredient-input");
 var addIngredientsButton = document.querySelector("#add-button");
 var recipeCollapsible = document.querySelector(".recipe-collapsible");
+var deleteButton = document.querySelector(".delete-button")
 
 // STARTING DATA
 // If localStorage has stored ingredients it will be recalled
@@ -179,10 +180,18 @@ function randomRec(data) {
   }
 }
 
+function clearAllIngredients() {
+  temporaryIngredientsArray = [];
+  updateIngredientsListInLocalStorage();
+  ingredientsDiv.innerHTML = '<li class="collection-header">Ingredients</li>';
+  recipeCollapsible.innerHTML = "";
+}
+
 function handleAddIngredientsClick(event) {
   event.preventDefault();
   validateIngredientInput();
 }
+
 
 // inititalization
 $(document).ready(function () {
@@ -196,6 +205,8 @@ if (temporaryIngredientsArray) {
 // Each time item add is clicked it will fetch recipes from the API
 // This way the recipe list updates when each new ingredient is added
 addIngredientsButton.addEventListener("click", handleAddIngredientsClick);
+deleteButton.addEventListener("click", clearAllIngredients)
+
 
 // populate ingredients list with ingredients saved to localStorage
 populateIngredientToIngredientsDiv(temporaryIngredientsArray);
