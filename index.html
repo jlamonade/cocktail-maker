@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,14 +13,17 @@
       integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
       crossorigin="anonymous"
     ></script>
-    <link rel="preconnect" href="https://fonts.gstatic.com"> 
-<link href="https://fonts.googleapis.com/css2?family=Poiret+One&display=swap" rel="stylesheet">
-   
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poiret+One&display=swap"
+      rel="stylesheet"
+    />
+
     <title>Lazy Mixology</title>
-    
-</head>
-<body>
+  </head>
+  <body>
     <header>
+
         <nav>
 
             <div class="nav-wrapper teal lighten-1">
@@ -40,82 +44,132 @@
                 <use class="custom-text" xlink:href="#s-text"></use>
               </svg>
 
-
-
-            </div>
-          </nav>
+          <svg width="100%" height="200">
+            <g transform="translate(000,30)">
+              <text
+                id="TextElement"
+                x="0"
+                y="0"
+                style="font-family: Verdana; font-size: 16; visibility: hidden"
+              >
+                Lazy Mixology
+                <set
+                  attributeName="visibility"
+                  attributeType="CSS"
+                  to="visible"
+                  begin="1s"
+                  dur="5s"
+                  fill="freeze"
+                />
+                <animateMotion
+                  path="M 0 0 L 050% 030"
+                  begin="1s"
+                  dur="5s"
+                  fill="freeze"
+                />
+                <!-- <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="-10" to="0" begin="1s" dur="5s" fill="freeze" />  -->
+                <animateTransform
+                  attributeName="transform"
+                  attributeType="XML"
+                  type="scale"
+                  from="1"
+                  to="3"
+                  additive="sum"
+                  begin="1s"
+                  dur="5s"
+                  fill="freeze"
+                />
+              </text>
+            </g>
+            Sorry, your browser does not support inline SVG.
+          </svg>
+        </div>
+      </nav>
     </header>
+
     <main>
-       <section id= "instructions">
+      <section id="instructions">
         <div class="row">
-            <div class="col s4 offset-s4 valign">
-              <div class="card teal lighten-2">
-                <div class="card-content white-text">
-                  <span class="card-title">Instructions</span>
-                  <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ratione aut voluptatum atque alias suscipit quasi quis minus fugiat nostrum velit esse illo rem, itaque laudantium qui consequuntur provident deleniti dolores?</p>
-                </div>
-              </div>
+          <div class="card teal col s12 m8 l6 offset-m2 offset-l3">
+            <div class="card-content center-align">
+              <span class="card-title">Instructions</span>
+              <p>
+                Enter ingredients that you have or wish to use and
+                get random cocktail recipes back!
+              </p>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section id= "ingredients">
-            <div class="row">
-                <form class="col s12">
-                  <div class="row">
-                    <div class="input-field col s4 offset-s4 valign">
-                        <p class="right-align"><a class="btn-floating btn-large waves-effect waves-indigo" id="add-button"><i class="material-icons">+</i></a>
-                        </p>
-                      <textarea id="icon_prefix2" class="materialize-textarea"></textarea>
-                      <label for="icon_prefix2">Enter Ingredients</label>
-                    </div>
+      <section id="ingredients">
+        <div class="row">
+          <form class="col s12 m8 l6 offset-m2 offset-l3 center-align">
+            <input
+              placeholder="Enter Ingredient"
+              id="ingredient-input"
+              type="text"
+            />
+            <button
+              class="btn waves-effect waves-light"
+              type="submit"
+              id="add-button"
+            >
+              Add Ingredient
+            </button>
+          </form>
+        </div>
+        <div class="row delete-button center-align">
+            <a class="waves-effect waves-light btn teal">Clear Ingredients</a>
+          </div>
+      </section>
+
+      <div id="ingredient-list" class="row center-align">
+        <ul class="collection ingredient-ul teal col s12 m8 l6 offset-m2 offset-l3">
+          <li class="collection-header">Ingredients</li>
+          <!-- <li>placeholder</li> -->
+        </ul>
+      </div>
+
+      <section id="recipe" class="row">
+        <ul class="collapsible recipe-collapsible col s12 m8 l6 offset-m2 offset-l3">
+          <!-- <li>
+            <div class="collapsible-header teal">Recipe Name placeholder</div>
+            <div class="collapsible-body">
+              <ul>
+                <li>ingredient</li>
+              </ul>
+              <div>recipe instructions placeholder</div>
+            </div>
+          </li> -->
+        </ul>
+      </section>
+
+      <section id="maps" class="row">
+        <ul class="collapsible col s12 m8 l6 offset-m2 offset-l3">
+          <li>
+            <div class="collapsible-header teal">
+              Need More Ingredients? Find Stores Nearby!
+            </div>
+            <div class="collapsible-body">
+              <div class="row">
+                <form>
+                  <div class="input-field col s12">
+                    <input
+                      placeholder="Enter Address or Zip Code"
+                      id="location-input"
+                      type="text"
+                    />
                   </div>
                 </form>
               </div>
-        </section>
-
-        <div class="delete-button">
-          <a class="waves-effect waves-light btn-large teal lighten-1">Delete Items</a>
-          </div>
-
-        <section id="ingredient-list">
-            <ul class="collection">
-              </ul>
-        </section>
-
-        
-
-        <section id="recipe">
-            <ul class="collapsible popout">
-                <!-- fills with recipes -->
-            </ul>
-        </section>
-      
-        <section id="maps">
-            <ul class="collapsible popout">
-            <li>
-              <div class="collapsible-header teal lighten-1"><i class="material-icons">Need More Ingredients? Find Stores Nearby!</i></div>
-              <div class="collapsible-body "></span>
-                <div class="row">
-                  <form class="col s4 offset-s4 valign">
-                    <div class="row">
-                      <div class="input-field col s12">
-                        <textarea id="textarea1" class="materialize-textarea"></textarea>
-                        <label for="textarea1">Enter Location</label>
-                      </div>
-                    </div>
-                  </form>
-                </div>
-              </div>
-            </li>
-            </ul>
-        </section>    
-    
-
+            </div>
+          </li>
+        </ul>
+      </section>
     </main>
     <script src="./assets/js/script.js"></script>
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-</body>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  </body>
 </html>

@@ -1,35 +1,96 @@
 * {
-    margin-top:0px ;
-    margin-bottom: 0px;
-    text-align: center;
-    font-family: 'Poiret One', cursive;
-    color: #f0fff0;
-    font-weight:bold;
-    
+  font-family: "Poiret One", cursive;
+  color: #f0fff0;
+  font-weight: 500;
+}
+
+p {
+  font-size: 1.5rem;
+}
+
+.blue-custom {
+  background-color: #085996 !important;
+}
+
+.red-custom {
+  background-color: #96130f !important;
+}
+
+.green-custom {
+  background-color: #089637 !important;
 }
 
 body {
-    background-color: black;
+  background-color: black;
 }
 
 img {
-    width: 50px;
-    height: 50px;
-    margin-left: 230px;
-    margin-top: 4px;
-    fill: honeydew;
-
+  width: 50px;
+  height: 50px;
+  margin-left: 230px;
+  margin-top: 4px;
+  fill: honeydew;
 }
 
-#input-field{
-    font-family: 'Poiret One', cursive;
-
+#ingredient-input {
+  font-family: "Poiret One", cursive;
 }
 
+.collapsible {
+  background: none;
+  padding: 0 !important;
+}
+
+#ingredients,
+#ingredient-list,
+#recipe,
+#maps,
+#instructions {
+  margin: 0.75rem;
+  outline: none;
+}
+
+#ingredient-list {
+  font-size: 1.5rem;
+}
+
+.collapsible-header {
+  font-size: 1.5rem;
+}
 
 .collection {
-    background-color: black;
+  background-color: black;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  border-bottom: 0 !important;
 }
 
+.collection li {
+  padding: 0px !important;
+  margin: 15px !important;
+  border-bottom: 0 !important;
+  cursor: pointer;
+}
 
+.collapsible-header,
+.collapsible-body,
+.collapsible,
+ul.collapsible > li {
+  border: 0 !important;
+  border-bottom: 0 !important;
+  box-shadow: none !important;
+  border-radius: 2px;
+}
 
+.collapsible-body ul {
+  margin-bottom: 20px;
+}
+
+ul.collapsible > li {
+  margin-bottom: 5px;
+}
+
+.collapsible-body {
+  font-size: 1.5rem;
+}
