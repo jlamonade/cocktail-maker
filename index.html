@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./assets/css/style.css" />
+    <link rel="stylesheet" href="./assets/css/style.css" /> 
+    <link rel="stylesheet" href="./assets/css/logo1.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <script
       src="https://code.jquery.com/jquery-3.5.1.min.js"
@@ -21,20 +22,22 @@
     <header>
         <nav>
 
-            <div class="nav-wrapper teal lighten-2">
+            <div class="nav-wrapper teal lighten-1">
               <!-- <a href="#" class="brand-logo center">Lazy Mixology</a> -->
-
-
-              <svg width="100%" height="200">
-                <g transform="translate(000,30)"> 
-                  <text id="TextElement" x="0" y="0" style="font-family:Verdana;font-size:16; visibility:hidden"> Lazy Mixology
-                    <set attributeName="visibility" attributeType="CSS" to="visible" begin="1s" dur="5s" fill="freeze" />
-                    <animateMotion path="M 0 0 L 050% 030" begin="1s" dur="5s" fill="freeze" />
-                    <!-- <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="-10" to="0" begin="1s" dur="5s" fill="freeze" />  -->
-                    <animateTransform attributeName="transform" attributeType="XML" type="scale" from="1" to="3" additive="sum" begin="1s" dur="5s" fill="freeze" /> 
-                  </text> 
-                </g> 
-                Sorry, your browser does not support inline SVG.
+<!-- 
+              <svg viewBox="0 0 3000 300"> -->
+                <svg viewBox="0 0 5000 300">               
+                <!-- Symbol-->
+                <symbol id="s-text">
+                  <text text-anchor="middle" x="50%" y="50%" dy=".35em" class="text-flames">Lazy Mixology</text>
+                  <image src="./assets/images/icon.svg">
+                </symbol>
+                <!-- Duplicate symbols-->
+                <use class="custom-text" xlink:href="#s-text"></use>
+                <use class="custom-text" xlink:href="#s-text"></use>
+                <use class="custom-text" xlink:href="#s-text"></use>
+                <use class="custom-text" xlink:href="#s-text"></use>
+                <use class="custom-text" xlink:href="#s-text"></use>
               </svg>
 
 
