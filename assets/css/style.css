@@ -83,6 +83,10 @@ ul.collapsible > li {
   border-radius: 2px;
 }
 
+.collapsible-body ul {
+  margin-bottom: 20px;
+}
+
 ul.collapsible > li {
   margin-bottom: 5px;
 }
