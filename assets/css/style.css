@@ -42,6 +42,10 @@ img {
   padding: 0 !important;
 }
 
+button {
+  font-family: "Poiret One", cursive !important; 
+}
+
 #ingredients,
 #ingredient-list,
 #recipe,
