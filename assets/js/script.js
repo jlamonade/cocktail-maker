@@ -36,6 +36,7 @@ function validateIngredientInput() {
           temporaryIngredientsArray.push(ingredientString);
           populateIngredientToIngredientsDiv(temporaryIngredientsArray);
           updateIngredientsListInLocalStorage();
+          ingredientInput.value = "";
           getData();
         }
       }
@@ -71,6 +72,7 @@ function removeIngredientFromList(event) {
     temporaryIngredientsArray.splice(removeIndex, 1);
     updateIngredientsListInLocalStorage();
     populateIngredientToIngredientsDiv(temporaryIngredientsArray);
+    console.log("handleingredientclick", cocktailIds)
     getData();
   }
 }
@@ -166,7 +168,7 @@ function populateCollapsibleWithRecipes(drink) {
 function randomRec(data) {
   // go through the data array until we have at least five items
   if (data.length >= 5) {
-    while (cocktailIds.length < 5) {
+    for (var i = 0; i < 5; i++) {
       // generate random index
       var rand = data[Math.floor(Math.random() * data.length)];
       // is the item at that index already in the cocktails id
@@ -175,7 +177,7 @@ function randomRec(data) {
         cocktailIds.push(rand.idDrink);
       }
     }
-  } else {
+  } else if (data.length > 0 && data.length < 5) {
     for (var i = 0; i < data.length; i++) {
       cocktailIds.push(data[i].idDrink);
     }
@@ -192,6 +194,7 @@ function clearAllIngredients() {
 function handleAddIngredientsClick(event) {
   event.preventDefault();
   validateIngredientInput();
+  console.log("handleingredientclick", cocktailIds)
 }
 
 // inititalization
