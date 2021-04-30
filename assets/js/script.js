@@ -1,5 +1,5 @@
 var ingredientsDiv = document.querySelector(".collection");
-var ingredientInput = document.querySelector("#icon_prefix2");
+var ingredientInput = document.querySelector("#ingredient-input");
 var addIngredientsButton = document.querySelector("#add-button");
 var recipeCollapsible = document.querySelector(".collapsible");
 
@@ -54,7 +54,7 @@ function populateIngredientToIngredientsDiv() {
     var ingredientString = ingredient.split("_").join(" ");
     var indgredientItem = document.createElement("li");
     indgredientItem.textContent = ingredientString;
-    indgredientItem.setAttribute("class", "collection-item");
+    indgredientItem.setAttribute("class", "collection-item teal lighten-1");
     indgredientItem.addEventListener("click", removeIngredientFromList);
     ingredientsDiv.appendChild(indgredientItem);
   });
@@ -162,11 +162,11 @@ $(document).ready(function () {
   $(".collapsible").collapsible();
 });
 
-getData();
+// getData();
 // randomRec();
 
 addIngredientsButton.addEventListener("click", validateIngredientInput);
 // validateIngredientInput("gin");
 // validateIngredientInput("vodka");
 
-populateIngredientToIngredientsDiv(temporaryIngredientsArray);
+// populateIngredientToIngredientsDiv(temporaryIngredientsArray);

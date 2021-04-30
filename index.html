@@ -21,7 +21,7 @@
     <header>
         <nav>
 
-            <div class="nav-wrapper teal lighten-2">
+            <div class="nav-wrapper teal">
               <!-- <a href="#" class="brand-logo center">Lazy Mixology</a> -->
 
 
@@ -42,72 +42,74 @@
             </div>
           </nav>
     </header>
+
     <main>
-       <section id= "instructions">
+      <section id="instructions">
         <div class="row">
-            <div class="col s4 offset-s4 valign">
-              <div class="card teal lighten-2">
-                <div class="card-content white-text">
-                  <span class="card-title">Instructions</span>
-                  <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ratione aut voluptatum atque alias suscipit quasi quis minus fugiat nostrum velit esse illo rem, itaque laudantium qui consequuntur provident deleniti dolores?</p>
-                </div>
-              </div>
+          <div class="card teal col s12 m8 offset-m2">
+            <div class="card-content white-text">
+              <span class="card-title">Instructions</span>
+              <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ratione aut voluptatum atque alias suscipit quasi quis minus fugiat nostrum velit esse illo rem, itaque laudantium qui consequuntur provident deleniti dolores?</p>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section id= "ingredients">
-            <div class="row">
-                <form class="col s12">
-                  <div class="row">
-                    <div class="input-field col s4 offset-s4 valign">
-                        <p class="right-align"><a class="btn-floating btn-large waves-effect waves-indigo" id="add-button"><i class="material-icons">+</i></a>
-                        </p>
-                      <textarea id="icon_prefix2" class="materialize-textarea"></textarea>
-                      <label for="icon_prefix2">Enter Ingredients</label>
-                    </div>
+      <section id="ingredients">
+        <div class="row">
+          <form class="col s12 m6 offset-m3">
+            <input placeholder="Enter Ingredient" id="ingredient-input" type="text">
+            <button class="btn waves-effect waves-light" type="submit" id="add-button">+</button>
+          </form>
+        </div>
+      </section>
+
+      <div class="delete-button">
+        <a class="waves-effect waves-light btn-large teal">Delete Items</a>
+        </div>
+
+      <div id="ingredient-list">
+          <ul class="collection blue-custom">
+            <li>placeholder</li>
+          </ul>
+        </div>
+
+      
+
+      <section id="recipe">
+        <ul class="collapsible">
+          <li>
+            <div class="collapsible-header red-custom">Recipe Name</div>
+            <div class="collapsible-body">
+              <ul>
+                <li>ingredient</li>
+              </ul>
+              <div>recipe instructions</div>
+            </div>
+          </li>
+        </ul>
+      </section>
+    
+      <section id="maps">
+        <ul class="collapsible">
+          <li>
+            <div class="collapsible-header green-custom">
+              Need More Ingredients? Find Stores Nearby!
+            </div>
+            <div class="collapsible-body">
+              <div class="row">
+                <form class="col s4 offset-s4 valign">
+                  <div class="input-field col s12">
+                    <textarea id="textarea1" class="materialize-textarea"></textarea>
+                    <label for="textarea1">Enter Location</label>
                   </div>
                 </form>
               </div>
-        </section>
-
-        <div class="delete-button">
-          <a class="waves-effect waves-light btn-large teal lighten-1">Delete Items</a>
-          </div>
-
-        <section id="ingredient-list">
-            <ul class="collection">
-              </ul>
-        </section>
-
-        
-
-        <section id="recipe">
-            <ul class="collapsible popout">
-                <!-- fills with recipes -->
-            </ul>
-        </section>
-      
-        <section id="maps">
-            <ul class="collapsible popout">
-            <li>
-              <div class="collapsible-header teal lighten-1"><i class="material-icons">Need More Ingredients? Find Stores Nearby!</i></div>
-              <div class="collapsible-body "></span>
-                <div class="row">
-                  <form class="col s4 offset-s4 valign">
-                    <div class="row">
-                      <div class="input-field col s12">
-                        <textarea id="textarea1" class="materialize-textarea"></textarea>
-                        <label for="textarea1">Enter Location</label>
-                      </div>
-                    </div>
-                  </form>
-                </div>
-              </div>
-            </li>
-            </ul>
-        </section>    
-    
+            </div>
+          </li>
+        </ul>
+      </section>    
+  
 
     </main>
     <script src="./assets/js/script.js"></script>
