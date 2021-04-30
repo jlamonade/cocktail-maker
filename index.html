@@ -74,14 +74,12 @@
     <main>
       <section id="instructions">
         <div class="row">
-          <div class="card teal col s12 m8 offset-m2">
-            <div class="card-content white-text">
+          <div class="card teal col s12 m8 l6 offset-m2 offset-l3">
+            <div class="card-content center-align">
               <span class="card-title">Instructions</span>
               <p>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                Ratione aut voluptatum atque alias suscipit quasi quis minus
-                fugiat nostrum velit esse illo rem, itaque laudantium qui
-                consequuntur provident deleniti dolores?
+                Enter ingredients that you have or wish to use and
+                get random cocktail recipes back!
               </p>
             </div>
           </div>
@@ -90,7 +88,7 @@
 
       <section id="ingredients">
         <div class="row">
-          <form class="col s12 m6 offset-m3">
+          <form class="col s12 m8 l6 offset-m2 offset-l3 center-align">
             <input
               placeholder="Enter Ingredient"
               id="ingredient-input"
@@ -101,26 +99,25 @@
               type="submit"
               id="add-button"
             >
-              +
+              Add Ingredient
             </button>
           </form>
         </div>
+        <div class="row delete-button center-align">
+            <a class="waves-effect waves-light btn teal">Clear Ingredients</a>
+          </div>
       </section>
 
-      <div class="delete-button">
-        <a class="waves-effect waves-light btn-large teal">Delete Items</a>
-      </div>
-
-      <div id="ingredient-list">
-        <ul class="collection ingredient-ul blue-custom">
+      <div id="ingredient-list" class="row center-align">
+        <ul class="collection ingredient-ul teal col s12 m8 l6 offset-m2 offset-l3">
           <li>placeholder</li>
         </ul>
       </div>
 
-      <section id="recipe">
-        <ul class="collapsible recipe-collapsible">
+      <section id="recipe" class="row">
+        <ul class="collapsible recipe-collapsible col s12 m8 l6 offset-m2 offset-l3">
           <li>
-            <div class="collapsible-header red-custom">Recipe Name placeholder</div>
+            <div class="collapsible-header teal">Recipe Name placeholder</div>
             <div class="collapsible-body">
               <ul>
                 <li>ingredient</li>
@@ -131,15 +128,15 @@
         </ul>
       </section>
 
-      <section id="maps">
-        <ul class="collapsible">
+      <section id="maps" class="row">
+        <ul class="collapsible col s12 m8 l6 offset-m2 offset-l3">
           <li>
-            <div class="collapsible-header green-custom">
+            <div class="collapsible-header teal">
               Need More Ingredients? Find Stores Nearby!
             </div>
             <div class="collapsible-body">
               <div class="row">
-                <form class="col s4 offset-s4 valign">
+                <form>
                   <div class="input-field col s12">
                     <input
                       placeholder="Enter Address or Zip Code"

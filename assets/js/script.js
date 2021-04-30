@@ -13,13 +13,12 @@ var cocktailIds = []; // Used to store IDs pulled from getData()
 
 // FUNCTIONS
 
-function validateIngredientInput(event) {
+function validateIngredientInput() {
   /* 
     validates by checking for a non-null return
     if non-null return then ingredients are added to temporary
     ingredients array
   */
-  event.preventDefault();
   var ingredients = ingredientInput.value;
   var requestUrl = `https://www.thecocktaildb.com/api/json/v2/${apiKey}/search.php?i=${ingredients}`;
   fetch(requestUrl)
@@ -47,7 +46,7 @@ function populateIngredientToIngredientsDiv() {
     var ingredientString = ingredient.split("_").join(" ");
     var indgredientItem = document.createElement("li");
     indgredientItem.textContent = ingredientString;
-    indgredientItem.setAttribute("class", "collection-item blue-custom");
+    indgredientItem.setAttribute("class", "collection-item teal");
     indgredientItem.addEventListener("click", removeIngredientFromList);
     ingredientsDiv.appendChild(indgredientItem);
   });
@@ -73,24 +72,25 @@ function removeIngredientFromList(event) {
   }
 }
 
-var getData = async () => {
+function getData() {
   /* 
     Gets the cocktaile recipe from the API using a list of ingredients
     as parameters
   */
-  var listofIng = temporaryIngredientsArray.join(",");
+  var listofIng = temporaryIngredientsArray.join(","); // joins ingredients into url friendly parameter
   fetch(
     `https://www.thecocktaildb.com/api/json/v2/${apiKey}/filter.php?i=${listofIng}`
   )
     .then((response) => response.json())
     .then((data) => {
+      cocktailIds = []; // clears out cocktailIds so that the while loop runs in randomRec()
       randomRec(data.drinks);
       getDrinkRecipes();
     });
-};
+}
 
 function getDrinkRecipes() {
-  recipeCollapsible.innerHTML = ""; // Empties out innerHTML so that it does not create duplicates
+  recipeCollapsible.innerHTML = ""; // clears out innerHTML so that it does not create duplicates
   for (var i = 0; i < cocktailIds.length; i++) {
     fetch(
       `https://www.thecocktaildb.com/api/json/v2/${apiKey}/lookup.php?i=${cocktailIds[i]}`
@@ -107,7 +107,6 @@ function populateCollapsibleWithRecipes(drink) {
     takes a random drink object, parses it for name, ingredients, and instructions
     and creates a new recipe collapsible element
   */
-  recipeCollapsible.innerHTML = "";
   var drinkName = drink.strDrink;
   var ingredients = [];
   var instructions = drink.strInstructions;
@@ -128,10 +127,11 @@ function populateCollapsibleWithRecipes(drink) {
 
   // CREATE AND BUILD
   var recipeLi = document.createElement("li");
+  recipeLi.setAttribute("class", "center-align")
 
   // Recipe Name
   var recipeNameDiv = document.createElement("div");
-  recipeNameDiv.setAttribute("class", "collapsible-header teal red-custom");
+  recipeNameDiv.setAttribute("class", "collapsible-header teal");
   recipeNameDiv.textContent = drinkName;
 
   // Recipe Body
@@ -161,7 +161,6 @@ function populateCollapsibleWithRecipes(drink) {
 }
 
 function randomRec(data) {
-  console.log(data)
   // go through the data array until we have at least five items
   if (data.length >= 5) {
     while (cocktailIds.length < 5) {
@@ -171,14 +170,18 @@ function randomRec(data) {
       if (!cocktailIds.includes(rand.idDrink)) {
         // if not, put it in there
         cocktailIds.push(rand.idDrink);
-      } 
+      }
     }
   } else {
     for (var i = 0; i < data.length; i++) {
       cocktailIds.push(data[i].idDrink);
     }
   }
-  console.log(cocktailIds)
+}
+
+function handleAddIngredientsClick(event) {
+  event.preventDefault();
+  validateIngredientInput();
 }
 
 // inititalization
@@ -192,7 +195,7 @@ if (temporaryIngredientsArray) {
 
 // Each time item add is clicked it will fetch recipes from the API
 // This way the recipe list updates when each new ingredient is added
-addIngredientsButton.addEventListener("click", validateIngredientInput);
+addIngredientsButton.addEventListener("click", handleAddIngredientsClick);
 
 // populate ingredients list with ingredients saved to localStorage
 populateIngredientToIngredientsDiv(temporaryIngredientsArray);
