@@ -1,4 +1,5 @@
 * {
+<<<<<<< HEAD
   /* margin-top: 0px;
   margin-bottom: 0px; */
   text-align: center;
@@ -17,6 +18,27 @@
 
 .green-custom {
     background-color: #089637!important;
+=======
+  font-family: "Poiret One", cursive;
+  color: #f0fff0;
+  font-weight: 500;
+}
+
+p {
+  font-size: 1.5rem;
+}
+
+.blue-custom {
+  background-color: #085996 !important;
+}
+
+.red-custom {
+  background-color: #96130f !important;
+}
+
+.green-custom {
+  background-color: #089637 !important;
+>>>>>>> ce3e9b6e6643d2fac9dfae5b7cb7d3c70c6d4037
 }
 
 body {
@@ -33,11 +55,16 @@ img {
 
 #ingredient-input {
   font-family: "Poiret One", cursive;
+  text-align: center;
 }
 
 .collapsible {
-  text-align: center;
   background: none;
+  padding: 0 !important;
+}
+
+button {
+  font-family: "Poiret One", cursive !important; 
 }
 
 #ingredients,
@@ -49,7 +76,7 @@ img {
   outline: none;
 }
 
-#ingredient-list{
+#ingredient-list {
   font-size: 1.5rem;
 }
 
@@ -61,19 +88,39 @@ img {
   background-color: black;
   border: 0 !important;
   box-shadow: none !important;
-  padding: 1rem!important;
-  border-bottom: 0!important;
+  padding: 0 !important;
+  border-bottom: 0 !important;
 }
 
-.collection-item {
-  border-bottom: 1px solid white;
+.collection li {
+  padding: 0px !important;
+  margin: 15px !important;
+  border-bottom: 0 !important;
+  cursor: pointer;
 }
 
 .collapsible-header,
 .collapsible-body,
 .collapsible,
 ul.collapsible > li {
-  border: 0!important;
-  border-bottom: 0!important;
+  border: 0 !important;
+  border-bottom: 0 !important;
   box-shadow: none !important;
+  border-radius: 2px;
+}
+
+.collapsible-body ul {
+  margin-bottom: 20px;
+}
+
+ul.collapsible > li {
+  margin-bottom: 5px;
+}
+
+.collapsible-body {
+  font-size: 1.5rem;
+}
+
+iframe {
+  margin-top: 20px;
 }

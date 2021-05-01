@@ -1,0 +1,104 @@
+.custom-image{
+ position: absolute;
+top: 0px; left: -220px;
+}
+
+.custom-text {
+  font-size:9em; 
+  margin:8px 0 8px 0;
+  font: 12em 'Poiret One';
+
+
+  /* font: 12em/1 Open Sans, Impact; */
+  /* font-weight: 16px; */
+  /* border:10px; */
+
+  letter-spacing: 3vw;  /*15px*/
+  text-transform: uppercase; 
+  
+   /* fill: none; */
+
+  -webkit-animation: neon2 3s infinite linear;
+  animation: neon2 3s infinite linear;
+
+ }
+ 
+/*glow*/
+/* @keyframes neon1 {
+  from {
+    text-shadow: 0 0 10px #fff,
+               0 0 20px  #fff,
+               0 0 30px  #fff,
+               0 0 40px  #FF1177,
+               0 0 70px  #FF1177,
+               0 0 80px  #FF1177,
+               0 0 100px #FF1177,
+               0 0 150px #FF1177;
+  }
+  to {
+    text-shadow: 0 0 5px #fff,
+               0 0 10px #fff,
+               0 0 15px #fff,
+               0 0 20px #FF1177,
+               0 0 35px #FF1177,
+               0 0 40px #FF1177,
+               0 0 50px #FF1177,
+               0 0 75px #FF1177;
+  }
+} */
+
+  /*glow*/
+@keyframes neon2 {
+    from {
+      text-shadow: 0 0 10px #fff,
+                 0 0 20px  #fff,
+                 0 0 30px  #fff,
+                 0 0 40px  #fff,
+                 0 0 70px  #fff,
+                 0 0 80px rgb(24, 100, 93),
+                 0 0 100px rgb(24, 100, 93),
+                 0 0 150px rgb(24, 100, 93)
+    }
+    to {
+      text-shadow: 0 0 5px #fff,
+                 0 0 10px #fff,
+                 0 0 15px #fff,
+                 0 0 20px #fff,
+                 0 0 35px #fff,
+                 0 0 40px rgb(24, 100, 93),
+                 0 0 50px rgb(24, 100, 93),
+                 0 0 75px rgb(24, 100, 93)
+    }
+  }
+
+  @keyframes text-flames {
+    0%   {transform: scale(1, 1); opacity: 0.7}
+    50%  {transform: scale(0.95, 1); opacity: 1; color:#ffffff; }
+    100% {transform: scale(1, 1); opacity: 0.7}
+  }
+  .text-flames {
+    fill: rgb(38, 166, 154); /*rgb(2, 102, 2);*/ /*#d84437;*/
+    font-weight: bold;
+    animation       : text-flames .7s ease infinite;
+    transform-origin: center top;
+  }
+  
+
+  /* Other styles */
+svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  @media (max-width: 650px) {
+  
+    #container{
+      width: 100%;
+    }
+    
+    .text-flames{
+      font-size:3.5em;
+    }
+  
+  }
+  
